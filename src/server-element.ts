@@ -1,7 +1,7 @@
 import StyledComponent from "./styled-component";
 import Store from "./store";
 import extendComponent from "./extend-component";
-import {addNamespace} from "./utils";
+import {updateStyles} from "./utils";
 
 import {ExtendComponent} from "./extend-component.d";
 import {InitialProps} from "./initial-props.d";
@@ -33,21 +33,14 @@ const create = (
 			super(props);
 			const {_name, _names = [], _namespace} = initialProps;
 			const [name] = _names;
-			if (_name) {
-				if (
-					_names.length < 2 &&
-					!(name || _name).match(new RegExp(`^${_namespace}`))
-				) {
-					this.store.addStyle(
-						addNamespace(_name, _namespace),
-						this.style
-					);
-				} else {
-					this.store.addStyle(_name, this.style);
+			updateStyles(
+				{name, _name},
+				_namespace,
+				_names,
+				(selector: string) => {
+					this.store.addStyle(selector, this.style);
 				}
-			} else {
-				this.store.addStyle(name, this.style);
-			}
+			);
 		}
 	}
 

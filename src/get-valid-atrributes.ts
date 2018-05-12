@@ -1,8 +1,5 @@
 import {htmlAttributes, svgElements} from "./elements";
-import {isTruthy} from "./utils";
-
-const dataOrAria: (str: string) => boolean = (str: string) =>
-	str === "data-" || str === "aria-";
+import {isTruthy, isHandler, dataOrAria} from "./utils";
 
 const getTagAttributes = (tag: string) => {
 	const validAttributes: string[] = htmlAttributes["*"].concat(
@@ -13,9 +10,15 @@ const getTagAttributes = (tag: string) => {
 	}
 	return validAttributes;
 };
+
 const getValidAttributes: (str: string, tag: string) => boolean = (
 	str: string,
 	tag: string
-) => isTruthy(str, getTagAttributes(tag)) || dataOrAria(str.substr(0, 5));
+): boolean => {
+	const validAttribute = isTruthy(str, getTagAttributes(tag));
+	const dataOrAriaAttribute = dataOrAria(str.substr(0, 5));
+	const handlerAttribute = isHandler(str.substr(0, 3));
+	return validAttribute || dataOrAriaAttribute || handlerAttribute;
+};
 
 export default getValidAttributes;

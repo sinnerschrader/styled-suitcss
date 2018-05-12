@@ -9,4 +9,6 @@ class Styled extends StyledBase {
 
 const {styled} = new Styled();
 
+export {handleState} from "./utils";
+
 export default styled;

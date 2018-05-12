@@ -1,1 +1,1 @@
-export declare type StyleInterpolation = (props: {}) => string;
+export declare type StyleInterpolation = (props: {}) => any;

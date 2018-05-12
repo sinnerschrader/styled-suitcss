@@ -1,5 +1,5 @@
 import styleElement from "./style-element";
-import {sortbyNames} from "./utils";
+import {sortByNames} from "./utils";
 const Stylis = require("stylis");
 
 export const stylis = new Stylis({
@@ -34,8 +34,8 @@ class Store {
 		if (!this.selectors.includes(selector)) {
 			this.selectors.push(selector);
 			this.styles.push(stylis(`.${selector}`, style));
-			this.styles = this.styles.sort(sortbyNames);
-			this.selectors = this.selectors.sort(sortbyNames);
+			this.styles = this.styles.sort(sortByNames);
+			this.selectors = this.selectors.sort(sortByNames);
 			if (this.styleElement) {
 				this.styleElement.innerHTML = this.styles.join("");
 			}

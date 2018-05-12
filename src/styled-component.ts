@@ -1,12 +1,32 @@
 import * as React from "react";
-import {cx, isTruthy, keepProps, removeProps, addNamespace} from "./utils";
+import * as cx from "classnames";
+import {
+	isTruthy,
+	keepProps,
+	removeProps,
+	addNamespace,
+	isHandler,
+	handleState,
+	updateStyles,
+    kebapCase
+} from "./utils";
 import validify from "./get-valid-atrributes";
 
 import {StyleStore} from "./style-store.d";
 import {InitialProps} from "./initial-props.d";
 import {StyleInterpolation} from "./style-interpolation.d";
 
-class StyledComponent extends React.Component<InitialProps> {
+class StyledComponent extends React.Component<
+	InitialProps & {listeners: string[]}
+> {
+	state: {_mounted?: boolean} = {
+		...(this.props.listeners
+			? this.props.listeners
+					.map(x => ({[kebapCase(x)]: this.props[x]}))
+					.reduce((a, b) => ({...a, ...b}), {})
+			: {})
+	};
+
 	initialProps: InitialProps = {_name: "", _names: []};
 	tag: any = "";
 	strings: string[] = [];
@@ -18,37 +38,53 @@ class StyledComponent extends React.Component<InitialProps> {
 	componentDidMount() {
 		const {_name, _names = [], _namespace} = this.initialProps;
 		const [name] = _names;
-		if (_name) {
-			if (
-				_names.length < 2 &&
-				!(name || _name).match(new RegExp(`^${_namespace}`))
-			) {
-				this.store.addStyle(
-					addNamespace(_name, _namespace),
-					this.style
-				);
-			} else {
-				this.store.addStyle(_name, this.style);
+		updateStyles({name, _name}, _namespace, _names, (selector: string) => {
+			this.store.addStyle(selector, this.style);
+		});
+		this.setState(
+			{
+				_mounted: true
+			},
+			() => {
+				this.style;
 			}
-		} else {
-			this.store.addStyle(name, this.style);
+		);
+	}
+
+	componentDidUpdate(oldProps) {
+		const {listeners} = this.props;
+		if (listeners && listeners.length > 0) {
+			listeners.forEach((listener: string) => {
+				if (oldProps[listener] !== this.props[listener]) {
+					this.style;
+				}
+			});
 		}
+	}
+
+	handleArgFn(arg: StyleInterpolation): string {
+		if (this.state._mounted) {
+			this.setState(arg(this.props));
+		}
+		return "";
 	}
 
 	/**
 	 *
 	 * @returns {string}
 	 */
+
 	get style(): string {
 		return this.strings
 			.map((str: string, i: number) => {
-				const arg: string | StyleInterpolation | undefined = this.args[
-					i
-				];
+				const arg: any = this.args[i];
 				const injection: string =
-					typeof arg === "function" ? arg(this.props) : arg;
+					typeof arg === "function" ? this.handleArgFn(arg) : arg;
 				return [str, injection];
 			})
+			.concat([
+				this.props.listeners ? this.handleArgFn(handleState) : null
+			])
 			.reduce(
 				(prev: string[], current: string[]) => prev.concat(current),
 				[]
@@ -62,23 +98,27 @@ class StyledComponent extends React.Component<InitialProps> {
 	 * @returns {object}
 	 */
 	private get mergedProps(): object &
-		InitialProps & {children: any; className: string} {
+		InitialProps & {children: any; className: string; listeners: string[]} {
 		return {
 			...this.initialProps,
 			...this.props,
-			// ensure correct className
 			children: [
 				...React.Children.toArray(
 					typeof this.initialProps._children === "function"
 						? this.initialProps._children(
-								removeProps(this.props, [
-									"className",
-									"_name",
-									"children",
-									"_children",
-									"_names",
-									"_namespace"
-								])
+								removeProps(
+									this.props,
+									[
+										"className",
+										"_name",
+										"listeners",
+										"children",
+										"_children",
+										"_names",
+										"_namespace"
+									],
+									(str: string) => !isHandler(str)
+								)
 						  )
 						: this.initialProps._children
 				),
@@ -92,7 +132,7 @@ class StyledComponent extends React.Component<InitialProps> {
 	 *
 	 * @returns {object}
 	 */
-	private get validProps(): object {
+	private get validProps(): object & {} {
 		if (typeof this.tag === "string") {
 			return keepProps(
 				{
@@ -104,7 +144,8 @@ class StyledComponent extends React.Component<InitialProps> {
 						),
 						...(this.mergedProps._names || []).map((name: string) =>
 							addNamespace(name, this.initialProps._namespace)
-						)
+						),
+						{...this.state, _mounted: false}
 					)
 				},
 				Object.keys(this.mergedProps).filter((str: string) =>
@@ -120,6 +161,7 @@ class StyledComponent extends React.Component<InitialProps> {
 	 * @returns {any}
 	 */
 	render() {
+		//console.log(this.validProps);
 		if (!this.tag) {
 			return null;
 		}

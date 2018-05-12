@@ -20,4 +20,6 @@ styled.ServerStyleSheet = class ServerStyleSheet {
 	}
 };
 
+export {handleState} from "./utils";
+
 export default styled;
