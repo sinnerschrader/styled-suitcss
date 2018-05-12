@@ -5,7 +5,7 @@ const {renderToString} = require("react-dom/server");
 const App = require("./app");
 const styled = require("../").default;
 const pretty = require("pretty");
-var minify = require("html-minifier").minify;
+const {minify} = require("html-minifier");
 
 const markup = renderToString(React.createElement(App));
 const sheet = new styled.ServerStyleSheet();

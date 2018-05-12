@@ -1,5 +1,5 @@
 const React = require("react");
-const styled = require("../").default;
+const {default: styled} = require("../");
 
 const COLORS = {
 	theme: "hsla(-90, 50%, 30%, 1)",
@@ -194,13 +194,28 @@ const Button = styled.button({
   
   &:hover {
  		 border-color: rgba(0, 0, 0, 0.6);
- 		 background-image: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2));
+ 		 background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
   }
   
   &:active {
  		 border-color: rgba(0, 0, 0, 0.8);
- 		 background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+ 		 background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
   }
+  
+  &:focus {
+ 		 box-shadow: 0 0 3px 3px highlight;
+ 		 outline: 0;
+  }
+  
+  &.is-selected {
+ 		 box-shadow: 0 0 0 2px #fff, 0 0 0 5px rgba(55, 55, 255, 0.9);
+ 		 outline: 0;
+  }
+  
+  &.camel-case-to-kebap-case-states {
+ 		 background-color: ${COLORS.blue}
+  }
+ 
 `;
 
 const ButtonIcon = Icon.extend({
@@ -224,89 +239,119 @@ const IconCardButton = CardButton.extend({
   padding-left: 0.5em;
 `;
 
-module.exports = () => {
-	return React.createElement(
-		LayoutQuad,
-		{},
-		React.createElement(
-			BlueCard,
-			{"data-attribute": "It Works!"},
-			React.createElement(CardHeadline, {}, "Lorem ipsum dolor!"),
-			React.createElement(
-				CardCopy,
-				{},
-				React.createElement(SmallCardImage, {
-					src: "https://placehold.it/300x300/392929/bababf",
-					alt: "Placeholder image"
-				}),
-				"Consectetur adipisicing elit accusantium aliquam consequuntur, dolore dolorem esse eum itaque iure laudantium, magnam provident quis soluta vel voluptates? Nam numquam pariatur quam repellendus soluta.",
-				"Architecto consequuntur eligendi, et ex fugit libero officia, quas quis quos ratione reprehenderit sed tempore vero. Deserunt ducimus expedita libero nam quaerat.",
-				"Ad corporis, culpa cum dolores eligendi id itaque laboriosam, molestiae necessitatibus nisi, officiis praesentium temporibus vero.",
-				"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, consequatur corporis, culpa cum earum est libero necessitatibus sit tempora ullam, vel voluptatum! Corporis cumque in minus modi repellat totam velit."
-			)
-		),
-		React.createElement(
-			PurpleCard,
-			{},
-			React.createElement(CardImage, {
-				src: "https://placehold.it/600x300/343536/abbccd",
-				alt: "Placeholder image"
-			})
-		),
-		React.createElement(
-			WhiteCard,
-			{},
-			React.createElement(FitCardImage, {
-				src: "https://placehold.it/1000x400/44139a/ddd",
-				alt: "Placeholder image"
-			}),
-			React.createElement(
-				CardHeadline,
-				{},
-				"Libero necessitatibus sit tempora!"
-			),
-			React.createElement(
-				CardCopy,
-				{},
-				"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, consequatur corporis, culpa cum earum est libero necessitatibus sit tempora ullam, vel voluptatum! Corporis cumque in minus modi repellat totam velit."
-			)
-		),
-		React.createElement(
+class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {};
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	handleClick(e) {
+		this.setState(prevState => ({
+			selected: !prevState.selected
+		}));
+	}
+
+	render() {
+		return React.createElement(
 			LayoutQuad,
-			{"aria-labelledby": "quad"},
+			{},
 			React.createElement(
-				WhiteCard,
-				{},
+				BlueCard,
+				{"data-attribute": "It Works!"},
+				React.createElement(CardHeadline, {}, "Lorem ipsum dolor!"),
 				React.createElement(
-					IconCardButton,
-					{iconType: ICONS.like},
-					"Like"
-				),
-				React.createElement(
-					IconCardButton,
-					{iconType: ICONS.dislike},
-					"Disike"
+					CardCopy,
+					{},
+					React.createElement(SmallCardImage, {
+						src: "https://placehold.it/300x300/392929/bababf",
+						alt: "Placeholder image"
+					}),
+					"Consectetur adipisicing elit accusantium aliquam consequuntur, dolore dolorem esse eum itaque iure laudantium, magnam provident quis soluta vel voluptates? Nam numquam pariatur quam repellendus soluta.",
+					"Architecto consequuntur eligendi, et ex fugit libero officia, quas quis quos ratione reprehenderit sed tempore vero. Deserunt ducimus expedita libero nam quaerat.",
+					"Ad corporis, culpa cum dolores eligendi id itaque laboriosam, molestiae necessitatibus nisi, officiis praesentium temporibus vero.",
+					"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, consequatur corporis, culpa cum earum est libero necessitatibus sit tempora ullam, vel voluptatum! Corporis cumque in minus modi repellat totam velit."
 				)
-			),
-			React.createElement(
-				SuccessCard,
-				{},
-				React.createElement(CardHeadline, {}, "You succeeded")
-			),
-			React.createElement(
-				WarningCard,
-				{},
-				React.createElement(CardHeadline, {}, "Warning!")
 			),
 			React.createElement(
 				PurpleCard,
 				{},
+				React.createElement(CardImage, {
+					src: "https://placehold.it/600x300/343536/abbccd",
+					alt: "Placeholder image"
+				})
+			),
+			React.createElement(
+				WhiteCard,
+				{},
+				React.createElement(FitCardImage, {
+					src: "https://placehold.it/1000x400/44139a/ddd",
+					alt: "Placeholder image"
+				}),
+				React.createElement(
+					CardHeadline,
+					{},
+					"Libero necessitatibus sit tempora!"
+				),
 				React.createElement(
 					CardCopy,
 					{},
 					"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, consequatur corporis, culpa cum earum est libero necessitatibus sit tempora ullam, vel voluptatum! Corporis cumque in minus modi repellat totam velit."
 				)
+			),
+			React.createElement(
+				LayoutQuad,
+				{"aria-labelledby": "quad"},
+				React.createElement(
+					WhiteCard,
+					{},
+					React.createElement(
+						IconCardButton,
+						{
+							iconType: ICONS.like,
+							camelCaseToKebapCaseStates: true,
+							isSelected: !this.state.selected,
+							onClick: this.handleClick,
+							listeners: [
+								"isSelected",
+								"camelCaseToKebapCaseStates"
+							]
+						},
+						"Like"
+					),
+					React.createElement(
+						IconCardButton,
+						{
+							iconType: ICONS.dislike,
+							isSelected: this.state.selected,
+							onClick: this.handleClick,
+							listeners: ["isSelected"]
+						},
+						"Disike"
+					)
+				),
+				React.createElement(
+					SuccessCard,
+					{},
+					React.createElement(CardHeadline, {}, "You succeeded")
+				),
+				React.createElement(
+					WarningCard,
+					{},
+					React.createElement(CardHeadline, {}, "Warning!")
+				),
+				React.createElement(
+					YellowCard,
+					{},
+					React.createElement(
+						CardCopy,
+						{},
+						"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, consequatur corporis, culpa cum earum est libero necessitatibus sit tempora ullam, vel voluptatum! Corporis cumque in minus modi repellat totam velit."
+					)
+				)
 			)
-		)
-	);
-};
+		);
+	}
+}
+
+module.exports = App;
