@@ -1,17 +1,22 @@
 {
   "name": "styled-uikit",
   "version": "1.0.0",
-  "main": "server.js",
-  "browser": "client.js",
+  "main": "lib/server.js",
+  "browser": "lib/client.js",
   "repository": "git@github.com:sinnerschrader/styled-ui.git",
   "author": "Gregor Adams <greg@pixelass.com>",
+  "files": [
+    "lib"
+  ],
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --hot",
     "gh-pages": "cross-env NODE_ENV=production yarn build && cross-env NODE_ENV=production webpack",
-    "build": "rimraf lib && tsc && yarn build:ssr",
-    "build:watch": "tsc --watch --sourceMap",
+    "build": "tsc && yarn build:ssr",
+    "build:watch": "tsc --watch --sourceMap --declaration",
     "build:ssr": "node app/server.js",
+    "clean": "rimraf lib",
+    "prebuild": "yarn clean",
     "dev": "yarn build && concurrently 'yarn build:watch' 'yarn start'",
     "format": "prettier '{app,src}/**/*.{t,j}{s,sx}' --write"
   },
