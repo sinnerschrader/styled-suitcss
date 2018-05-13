@@ -1,6 +1,6 @@
-import {StyleInterpolation} from "./style-interpolation";
 import {addNamespace} from "./utils";
-import {StyleStore} from "./style-store";
+import {StyleInterpolation} from "./styled-component";
+import {StyleStore} from "./store";
 
 /**
  *

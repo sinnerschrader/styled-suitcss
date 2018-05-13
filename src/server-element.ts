@@ -1,12 +1,8 @@
-import StyledComponent from "./styled-component";
-import Store from "./store";
-import extendComponent from "./extend-component";
+import StyledComponent, {InitialProps, StyleInterpolation} from "./styled-component";
+import Store, {StyleStore} from "./store";
+import extendComponent, {ExtendComponent} from "./extend-component";
 import {updateStyles} from "./utils";
 
-import {ExtendComponent} from "./extend-component.d";
-import {InitialProps} from "./initial-props.d";
-import {StyleInterpolation} from "./style-interpolation";
-import {StyleStore} from "./style-store.d";
 import keyframeCreator from "./keyframes";
 
 export const store = new Store();

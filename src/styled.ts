@@ -1,9 +1,8 @@
 import elements, {svgElements} from "./elements";
 
-import {InitialProps} from "./initial-props.d";
-import {CreateElement} from "./create-element.d";
-import {StyledDef} from "./styled-def.d";
-import {StyleInterpolation} from "./style-interpolation.d";
+import {InitialProps, CreateElement, StyleInterpolation} from "./styled-component";
+
+export declare type StyledDef = (strings: string[], ...args: any[]) => any;
 
 class Styled {
 	createElement: CreateElement = () => null;

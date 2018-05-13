@@ -2,6 +2,16 @@ import styleElement from "./style-element";
 import {sortByNames} from "./utils";
 const Stylis = require("stylis");
 
+export declare type AddStyle = (selector: string, style: string) => void;
+
+export interface StyleStore {
+    addStyle: AddStyle;
+    append?: (el: Element) => void;
+    selectors?: string[];
+    styles?: string[];
+    styleElement?: Element | null;
+}
+
 export const stylis = new Stylis({
 	keyframe: false,
 	prefix: true,

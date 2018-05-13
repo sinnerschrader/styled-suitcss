@@ -1,9 +1,18 @@
 import {oneOf} from "./utils";
+import {StyleInterpolation, InitialProps} from './styled-component';
+export declare type ExtensionCreator = (
+    extension: string[],
+    ...args: string[]
+) => void;
 
-import {InitialProps} from "./initial-props.d";
-import {ExtensionCreator} from "./extension-creator.d";
-import {CreateComponent} from "./create-component.d";
-import {ExtendComponent} from "./extend-component.d";
+export declare type CreateComponent = (
+    strings: string[],
+    args: (string | StyleInterpolation)[],
+    tag: any,
+    initialProps: InitialProps
+) => any;
+
+export declare type ExtendComponent = (props: InitialProps) => ExtensionCreator;
 
 const extendComponent = (
 	_this: any,

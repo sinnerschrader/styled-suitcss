@@ -1,5 +1,3 @@
-import {StyleInterpolation} from "./style-interpolation";
-
 /**
  *
  * @param input
@@ -138,19 +136,6 @@ export const isUpperCase: (str: string | undefined) => boolean = (
 export const dataOrAria: (str: string) => boolean = (str: string): boolean =>
 	str === "data-" || str === "aria-";
 
-/**
- *
- * @param {{listeners: string[]}} props
- * @returns {{}}
- */
-export const handleState: StyleInterpolation = (props: {
-	listeners: string[];
-}): {} =>
-	props.listeners
-		.map((prop: string): {} => ({
-			[kebapCase(prop)]: props[prop]
-		}))
-		.reduce((a: {}, b: {}): {} => ({...a, ...b}), {});
 
 /**
  *

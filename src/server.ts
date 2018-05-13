@@ -1,7 +1,7 @@
 import createElement, {store} from "./server-element";
 import StyledBase from "./styled";
 
-import {CreateElement} from "./create-element.d";
+import {CreateElement, InitialProps} from "./styled-component";
 
 class Styled extends StyledBase {
 	createElement: CreateElement = createElement;

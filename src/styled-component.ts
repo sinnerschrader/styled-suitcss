@@ -6,15 +6,26 @@ import {
 	removeProps,
 	addNamespace,
 	isHandler,
-	handleState,
 	updateStyles,
 	kebapCase
 } from "./utils";
 import validify from "./get-valid-atrributes";
+import {StyleStore} from "./store";
 
-import {StyleStore} from "./style-store.d";
-import {InitialProps} from "./initial-props.d";
-import {StyleInterpolation} from "./style-interpolation.d";
+export declare type StyleInterpolation = (props: {}) => any;
+export interface InitialProps {
+    _namespace?: string | undefined;
+    _name: string;
+    _names: string[];
+    _children?: any;
+}
+
+export declare type CreateElement = (
+    strings: string[],
+    args: (string | StyleInterpolation)[],
+    tagName: any,
+    initialProps: InitialProps
+) => any;
 
 class StyledComponent extends React.Component<
 	InitialProps & {listeners: string[]}
@@ -62,6 +73,11 @@ class StyledComponent extends React.Component<
 		}
 	}
 
+    /**
+	 *
+     * @param {StyleInterpolation} arg
+     * @returns {string}
+     */
 	handleArgFn(arg: StyleInterpolation): string {
 		if (this.state._mounted) {
 			this.setState(arg(this.props));
@@ -69,7 +85,22 @@ class StyledComponent extends React.Component<
 		return "";
 	}
 
-	/**
+    /**
+	 *
+     * @param {{listeners: string[]}} props
+     * @returns {{}}
+     */
+    private handleState(props: { listeners: string[] }): {} {
+    	return  props.listeners
+            .map((prop: string): {} => ({
+                [kebapCase(prop)]: props[prop]
+            }))
+            .reduce((a: {}, b: {}): {} => ({...a, ...b}), {});
+	}
+
+
+
+    /**
 	 *
 	 * @returns {string}
 	 */
@@ -83,7 +114,7 @@ class StyledComponent extends React.Component<
 				return [str, injection];
 			})
 			.concat([
-				this.props.listeners ? this.handleArgFn(handleState) : null
+				this.props.listeners ? this.handleArgFn(this.handleState) : null
 			])
 			.reduce(
 				(prev: string[], current: string[]) => prev.concat(current),
