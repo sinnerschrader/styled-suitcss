@@ -1,6 +1,6 @@
 import createElement, {store} from "./server-element";
 import StyledBase from "./styled";
-
+import {NAMESPACE} from "./style-element";
 import {CreateElement, InitialProps} from "./styled-component";
 
 class Styled extends StyledBase {
@@ -11,9 +11,11 @@ const {styled}: any = new Styled();
 
 styled.ServerStyleSheet = class ServerStyleSheet {
 	getStyleTags(): string {
-		return `<style data-styled-bem="${store.selectors.join(
-			","
-		)}">${store.styles.join("")}</style>`;
+		const selectors = store.selectors.join(",");
+		const keyframes = store.keyframes.join(",");
+		const styles = store.styles.join("");
+		const animations = store.animations.join("");
+		return `<style ${NAMESPACE}="${selectors}|${keyframes}">${styles}${".___{content:normal}"}${animations}</style>`;
 	}
 	collectStyles(input: any): any {
 		return input;

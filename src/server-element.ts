@@ -1,4 +1,7 @@
-import StyledComponent, {InitialProps, StyleInterpolation} from "./styled-component";
+import StyledComponent, {
+	InitialProps,
+	StyleInterpolation
+} from "./styled-component";
 import Store, {StyleStore} from "./store";
 import extendComponent, {ExtendComponent} from "./extend-component";
 import {updateStyles} from "./utils";

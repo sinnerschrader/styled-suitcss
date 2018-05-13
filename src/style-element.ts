@@ -1,14 +1,16 @@
 /* global document */
+
+export const NAMESPACE = "data-styled-uikit";
 const styleElement = (doc: any): Element => {
 	if (doc === null) {
 		return null;
 	}
-	const existingElement = doc.querySelector("style[data-styled-bem]");
+	const existingElement = doc.querySelector(`style[${NAMESPACE}]`);
 	if (existingElement) {
 		return existingElement;
 	}
 	const style = doc.createElement("style");
-	style.setAttribute("data-styled-bem", "");
+	style.setAttribute(NAMESPACE, "");
 	return style;
 };
 

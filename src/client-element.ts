@@ -1,5 +1,8 @@
 /* global document */
-import StyledComponent, {StyleInterpolation, InitialProps} from "./styled-component";
+import StyledComponent, {
+	StyleInterpolation,
+	InitialProps
+} from "./styled-component";
 import Store, {StyleStore} from "./store";
 import extendComponent, {ExtendComponent} from "./extend-component";
 

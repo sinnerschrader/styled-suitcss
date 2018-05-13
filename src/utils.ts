@@ -72,8 +72,30 @@ export const oneOf: (
 		.map(({check, value}) => (check === undefined ? null : value))
 		.filter(Boolean)[0];
 
+const patterns = [
+	/([\w]+)-([\w]+)--([\w]+)/,
+	/([\w]+)-([\w]+)/,
+	/([\w]+)--([\w]+)/,
+	/([\w]+)/
+];
+
+const orderByPattern = (name: string, patterns: RegExp[]): number => {
+	let counter: number = 0;
+	let match: string[] | null = null;
+	while (!match && counter < patterns.length) {
+		match = name.match(patterns[counter]);
+		++counter;
+	}
+	return patterns.length - counter;
+};
+
 /**
  *
+ * Patterns:
+ * Xxx
+ * Xxx-Xxx
+ * Xxx--xxx
+ * Xxx-Xxx--xxx
  * @param {string} a
  * @param {string} b
  * @returns {number}
@@ -82,31 +104,9 @@ export const sortByNames: (a: string, b: string) => number = (
 	a: string,
 	b: string
 ): number => {
-	const [aC] = a.split("{");
-	const [bC] = b.split("{");
-	const [aNames, aModifier] = aC.trim().split("--");
-	const [bNames, bModifier] = bC.trim().split("--");
-	const [, aName] = aNames.split("-");
-	const [, bName] = bNames.split("-");
-	if (aModifier) {
-		if (bModifier) {
-			if (aName) {
-				if (bName) {
-					return 0;
-				}
-				return 1;
-			}
-			return bName ? -1 : 0;
-		}
-		return 1;
-	}
-	if (aName) {
-		if (bName) {
-			return 0;
-		}
-		return 1;
-	}
-	return bName ? -1 : 0;
+	const [aName] = a.split("{");
+	const [bName] = b.split("{");
+	return orderByPattern(aName, patterns) - orderByPattern(bName, patterns);
 };
 
 /**
@@ -135,7 +135,6 @@ export const isUpperCase: (str: string | undefined) => boolean = (
  */
 export const dataOrAria: (str: string) => boolean = (str: string): boolean =>
 	str === "data-" || str === "aria-";
-
 
 /**
  *

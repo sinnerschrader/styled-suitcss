@@ -1,15 +1,15 @@
 import {oneOf} from "./utils";
-import {StyleInterpolation, InitialProps} from './styled-component';
+import {StyleInterpolation, InitialProps} from "./styled-component";
 export declare type ExtensionCreator = (
-    extension: string[],
-    ...args: string[]
+	extension: string[],
+	...args: string[]
 ) => void;
 
 export declare type CreateComponent = (
-    strings: string[],
-    args: (string | StyleInterpolation)[],
-    tag: any,
-    initialProps: InitialProps
+	strings: string[],
+	args: (string | StyleInterpolation)[],
+	tag: any,
+	initialProps: InitialProps
 ) => any;
 
 export declare type ExtendComponent = (props: InitialProps) => ExtensionCreator;

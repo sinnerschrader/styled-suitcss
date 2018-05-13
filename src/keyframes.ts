@@ -21,7 +21,7 @@ const keyframes: (
 		})
 		.join("");
 	const name = addNamespace(options._name, options._namespace);
-	store.addStyle("", `@keyframes ${name} {${style}}`);
+	store.addKeyframes(name, style);
 	return name;
 };
 

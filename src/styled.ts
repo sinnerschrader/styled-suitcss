@@ -1,6 +1,10 @@
 import elements, {svgElements} from "./elements";
 
-import {InitialProps, CreateElement, StyleInterpolation} from "./styled-component";
+import {
+	InitialProps,
+	CreateElement,
+	StyleInterpolation
+} from "./styled-component";
 
 export declare type StyledDef = (strings: string[], ...args: any[]) => any;
 

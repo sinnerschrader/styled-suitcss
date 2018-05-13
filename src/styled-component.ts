@@ -14,17 +14,17 @@ import {StyleStore} from "./store";
 
 export declare type StyleInterpolation = (props: {}) => any;
 export interface InitialProps {
-    _namespace?: string | undefined;
-    _name: string;
-    _names: string[];
-    _children?: any;
+	_namespace?: string | undefined;
+	_name: string;
+	_names: string[];
+	_children?: any;
 }
 
 export declare type CreateElement = (
-    strings: string[],
-    args: (string | StyleInterpolation)[],
-    tagName: any,
-    initialProps: InitialProps
+	strings: string[],
+	args: (string | StyleInterpolation)[],
+	tagName: any,
+	initialProps: InitialProps
 ) => any;
 
 class StyledComponent extends React.Component<
@@ -73,11 +73,11 @@ class StyledComponent extends React.Component<
 		}
 	}
 
-    /**
+	/**
 	 *
-     * @param {StyleInterpolation} arg
-     * @returns {string}
-     */
+	 * @param {StyleInterpolation} arg
+	 * @returns {string}
+	 */
 	handleArgFn(arg: StyleInterpolation): string {
 		if (this.state._mounted) {
 			this.setState(arg(this.props));
@@ -85,22 +85,20 @@ class StyledComponent extends React.Component<
 		return "";
 	}
 
-    /**
+	/**
 	 *
-     * @param {{listeners: string[]}} props
-     * @returns {{}}
-     */
-    private handleState(props: { listeners: string[] }): {} {
-    	return  props.listeners
-            .map((prop: string): {} => ({
-                [kebapCase(prop)]: props[prop]
-            }))
-            .reduce((a: {}, b: {}): {} => ({...a, ...b}), {});
+	 * @param {{listeners: string[]}} props
+	 * @returns {{}}
+	 */
+	private handleState(props: {listeners: string[]}): {} {
+		return props.listeners
+			.map((prop: string): {} => ({
+				[kebapCase(prop)]: props[prop]
+			}))
+			.reduce((a: {}, b: {}): {} => ({...a, ...b}), {});
 	}
 
-
-
-    /**
+	/**
 	 *
 	 * @returns {string}
 	 */
