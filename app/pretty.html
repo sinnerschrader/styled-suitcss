@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Generate UI kits with React</title>
-    <style data-styled-bem=",Button,Card,Icon,Headline,Svg,Path,Image,Copy,Card-Copy,Card-Image,Icon-Svg,Card-Button,MY_NAMESPACE-Layout,Button-Icon,Card-Headline,Card--purple,Card--white,Card--blue,Image--fix,Card--success,Card--warning,Card--yellow,MY_NAMESPACE-Layout--4,Card-Image--small,Card-Button--icon">
+    <style data-styled-uikit="Card,Image,Icon,Copy,Svg,Path,Headline,Button,Card--blue,Card--purple,Card--white,Card--success,Card--yellow,Image--fix,Card--warning,Button-Icon,MY_NAMESPACE-Layout,Card-Image,Icon-Svg,Card-Button,Card-Headline,Card-Copy,MY_NAMESPACE-Layout--4,Card-Image--small,Card-Button--icon|Animation-Blink,Animation-Shake">
       .Card {
         display: -webkit-box;
         display: -webkit-flex;
@@ -32,9 +32,8 @@
         display: inline-flex;
       }
 
-      .Headline {
+      .Copy {
         margin: 0;
-        font-size: 2rem;
       }
 
       .Svg {
@@ -45,8 +44,9 @@
         fill: currentColor;
       }
 
-      .Copy {
+      .Headline {
         margin: 0;
+        font-size: 2rem;
       }
 
       .Button {
@@ -93,56 +93,9 @@
         animation: Animation-Blink 0.5s steps(2, end) infinite alternate;
       }
 
-      .Card-Headline {
-        margin-bottom: 1rem;
-      }
-
-      @-webkit-keyframes Animation-Blink {
-        from {
-          opacity: 1;
-        }
-        to {
-          opacity: 0;
-        }
-      }
-
-      @keyframes Animation-Blink {
-        from {
-          opacity: 1;
-        }
-        to {
-          opacity: 0;
-        }
-      }
-
-      .Icon-Svg {
-        height: 1em;
-        width: 1em;
-      }
-
-      .Button-Icon {
-        margin-right: 0.5em;
-      }
-
-      .Card-Copy {
-        font-size: 1rem;
-      }
-
-      .MY_NAMESPACE-Layout {
-        display: grid;
-      }
-
-      .Card-Button {
-        width: 100%;
-        margin: 0.5em 0;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-      }
-
-      .Card-Image {
-        width: 100%;
+      .Button.is-shaking {
+        -webkit-animation: Animation-Shake 0.5s ease-in-out infinite alternate;
+        animation: Animation-Shake 0.5s ease-in-out infinite alternate;
       }
 
       .Card--blue {
@@ -160,6 +113,16 @@
         background-color: white;
       }
 
+      .Card--success {
+        background-color: hsla(120, 70%, 30%, 1);
+        color: #fff;
+      }
+
+      .Card--yellow {
+        background-color: hsla(40, 50%, 70%, 1);
+        color: #000;
+      }
+
       .Image--fix {
         width: calc(100% + 2rem);
         margin: -1rem -1rem 1rem -1rem;
@@ -167,19 +130,43 @@
         border-radius: 3px 3px 0 0;
       }
 
-      .Card--success {
-        background-color: hsla(120, 70%, 30%, 1);
-        color: #fff;
-      }
-
       .Card--warning {
         background-color: hsla(-10, 50%, 40%, 1);
         color: #fff;
       }
 
-      .Card--yellow {
-        background-color: hsla(40, 50%, 70%, 1);
-        color: #000;
+      .Button-Icon {
+        margin-right: 0.5em;
+      }
+
+      .MY_NAMESPACE-Layout {
+        display: grid;
+      }
+
+      .Card-Image {
+        width: 100%;
+      }
+
+      .Icon-Svg {
+        height: 1em;
+        width: 1em;
+      }
+
+      .Card-Button {
+        width: 100%;
+        margin: 0.5em 0;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+      }
+
+      .Card-Headline {
+        margin-bottom: 1rem;
+      }
+
+      .Card-Copy {
+        font-size: 1rem;
       }
 
       .MY_NAMESPACE-Layout--4 {
@@ -202,6 +189,54 @@
 
       .Card-Button--icon {
         padding-left: 0.5em;
+      }
+
+      .___ {
+        content: normal
+      }
+
+      @-webkit-keyframes Animation-Blink {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+
+      @keyframes Animation-Blink {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+
+      @-webkit-keyframes Animation-Shake {
+        from {
+          -webkit-transform: rotate(-10deg);
+          -ms-transform: rotate(-10deg);
+          transform: rotate(-10deg);
+        }
+        to {
+          -webkit-transform: rotate(10deg);
+          -ms-transform: rotate(10deg);
+          transform: rotate(10deg);
+        }
+      }
+
+      @keyframes Animation-Shake {
+        from {
+          -webkit-transform: rotate(-10deg);
+          -ms-transform: rotate(-10deg);
+          transform: rotate(-10deg);
+        }
+        to {
+          -webkit-transform: rotate(10deg);
+          -ms-transform: rotate(10deg);
+          transform: rotate(10deg);
+        }
       }
     </style>
   </head>
@@ -229,7 +264,7 @@
           <div class="Card Card--white">
             <button class="Button Card-Button Card-Button--icon is-selected is-special"><span class="Icon Button-Icon"><svg viewBox="0 0 24 24" class="Svg Icon-Svg"><path d="M23,10C23,8.89 22.1,8 21,8H14.68L15.64,3.43C15.66,3.33 15.67,3.22 15.67,3.11C15.67,2.7 15.5,2.32 15.23,2.05L14.17,1L7.59,7.58C7.22,7.95 7,8.45 7,9V19A2,2 0 0,0 9,21H18C18.83,21 19.54,20.5 19.84,19.78L22.86,12.73C22.95,12.5 23,12.26 23,12V10M1,21H5V9H1V21Z" class="Path"></path></svg></span>Like</button>
             <button
-              class="Button Card-Button Card-Button--icon"><span class="Icon Button-Icon"><svg viewBox="0 0 24 24" class="Svg Icon-Svg"><path d="M19,15H23V3H19M15,3H6C5.17,3 4.46,3.5 4.16,4.22L1.14,11.27C1.05,11.5 1,11.74 1,12V14A2,2 0 0,0 3,16H9.31L8.36,20.57C8.34,20.67 8.33,20.77 8.33,20.88C8.33,21.3 8.5,21.67 8.77,21.94L9.83,23L16.41,16.41C16.78,16.05 17,15.55 17,15V5C17,3.89 16.1,3 15,3Z" class="Path"></path></svg></span>Disike</button>
+              class="Button Card-Button Card-Button--icon is-shaking"><span class="Icon Button-Icon"><svg viewBox="0 0 24 24" class="Svg Icon-Svg"><path d="M19,15H23V3H19M15,3H6C5.17,3 4.46,3.5 4.16,4.22L1.14,11.27C1.05,11.5 1,11.74 1,12V14A2,2 0 0,0 3,16H9.31L8.36,20.57C8.34,20.67 8.33,20.77 8.33,20.88C8.33,21.3 8.5,21.67 8.77,21.94L9.83,23L16.41,16.41C16.78,16.05 17,15.55 17,15V5C17,3.89 16.1,3 15,3Z" class="Path"></path></svg></span>Disike</button>
           </div>
           <div class="Card Card--success">
             <h2 class="Headline Card-Headline">You succeeded</h2>
