@@ -1,5 +1,5 @@
 const React = require("react");
-const {default: styled} = require("../");
+const {default: styled, keyframes} = require("../");
 
 const COLORS = {
 	theme: "hsla(-90, 50%, 30%, 1)",
@@ -9,6 +9,18 @@ const COLORS = {
 	purple: "hsla(-60, 50%, 50%, 1)",
 	blue: "hsla(220, 50%, 50%, 1)"
 };
+
+const blink = keyframes({
+	_namespace: "Animation",
+	_name: "Blink"
+})`
+  from {
+  	opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
 
 const ICONS = {
 	like:
@@ -212,8 +224,12 @@ const Button = styled.button({
  		 outline: 0;
   }
   
-  &.camel-case-to-kebap-case-states {
+  &.is-special {
  		 background-color: ${COLORS.blue}
+  }
+  
+  &.is-blinking {
+  	animation: ${blink} 0.5s steps(2, end) infinite alternate;
   }
  
 `;
@@ -309,13 +325,11 @@ class App extends React.Component {
 						IconCardButton,
 						{
 							iconType: ICONS.like,
-							camelCaseToKebapCaseStates: true,
+							isSpecial: true,
+							isBlinking: this.state.selected,
 							isSelected: !this.state.selected,
 							onClick: this.handleClick,
-							listeners: [
-								"isSelected",
-								"camelCaseToKebapCaseStates"
-							]
+							listeners: ["isSelected", "isBlinking", "isSpecial"]
 						},
 						"Like"
 					),
