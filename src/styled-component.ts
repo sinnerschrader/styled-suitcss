@@ -8,7 +8,7 @@ import {
 	isHandler,
 	handleState,
 	updateStyles,
-    kebapCase
+	kebapCase
 } from "./utils";
 import validify from "./get-valid-atrributes";
 

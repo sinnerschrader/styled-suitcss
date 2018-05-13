@@ -20,6 +20,6 @@ styled.ServerStyleSheet = class ServerStyleSheet {
 	}
 };
 
-export {handleState} from "./utils";
+export {keyframes} from "./server-element";
 
 export default styled;

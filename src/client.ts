@@ -11,4 +11,5 @@ const {styled} = new Styled();
 
 export {handleState} from "./utils";
 
+export {keyframes} from "./client-element";
 export default styled;

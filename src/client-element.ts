@@ -7,9 +7,9 @@ import {ExtendComponent} from "./extend-component.d";
 import {InitialProps} from "./initial-props.d";
 import {StyleInterpolation} from "./style-interpolation.d";
 import {StyleStore} from "./style-store.d";
-import {addNamespace} from "./utils";
+import keyframeCreator from "./keyframes";
 
-const store = new Store({document});
+export const store = new Store({document});
 
 const create = (
 	strings: string[] = [],
@@ -33,5 +33,8 @@ const create = (
 
 	return Component;
 };
+
+export const keyframes = (options: {_name: string; _namespace?: string}) =>
+	keyframeCreator(store, options);
 
 export default create;
