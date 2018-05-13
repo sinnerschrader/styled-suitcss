@@ -71,7 +71,7 @@ export const Button = styled.button({
     }
     
     &.is-blinking {
-        animation: ${blink} 0.5s steps(2, end) ininite alternate;
+        animation: ${blink} 0.5s steps(2, end) infinite alternate;
     }
 `
 
