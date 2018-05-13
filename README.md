@@ -21,7 +21,7 @@ This library attempts to solve a specific problem:
 > It attempts to mock certain API points but only supports some basic features (some modified)
 
 ```jsx
-import styled from 'styled-uikit';
+import styled, {keyframes} from 'styled-uikit';
 import {colors} from './designkit';
 
 export const Card = styled.artice({
@@ -30,10 +30,22 @@ export const Card = styled.artice({
   margin: 1em;
   padding: 1em;
   border-radius: 3px;
-  backgrond: #fff;
+  background: #fff;
   color: #000;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 `
+
+const blink = keyframes({
+  _namespace: "Animation",
+  _name: "Blink"
+})`
+  from {
+        opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
 
 export const Button = styled.button({
     _name: "button"
@@ -52,6 +64,14 @@ export const Button = styled.button({
     
     &:active {
         background-color: #bbb;
+    }
+    
+    &.is-selected {
+        box-shadow: 0 0 0 4px ${colors.selection};
+    }
+    
+    &.is-blinking {
+        animation: ${blink} 0.5s steps(2, end) ininite alternate;
     }
 `
 
