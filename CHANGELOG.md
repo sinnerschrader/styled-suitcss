@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0-aplha.2"></a>
+# [1.0.0-aplha.2](https://github.com/sinnerschrader/styled-ui/compare/v1.0.0-aplha.1...v1.0.0-aplha.2) (2018-05-14)
+
+
+### Bug Fixes
+
+* provide consistent types ([adb9aa1](https://github.com/sinnerschrader/styled-ui/commit/adb9aa1))
+
+
+
 <a name="1.0.0-aplha.1"></a>
 # [1.0.0-aplha.1](https://github.com/sinnerschrader/styled-ui/compare/v1.0.0-aplha.0...v1.0.0-aplha.1) (2018-05-14)
 
