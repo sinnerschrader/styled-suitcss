@@ -204,7 +204,8 @@ const Icon = styled.span({
 `;
 
 const Button = styled.button({
-	_name: "Button"
+	_name: "Button",
+	listeners: ["isSelected"]
 })`
   display: inline-flex;
   background: ${COLORS.theme};
@@ -291,7 +292,8 @@ class App extends React.Component {
 			React.createElement(
 				BlueCard,
 				{"data-attribute": "It Works!"},
-				React.createElement(CardHeadline, {}, "Lorem ipsum dolor!"),
+        React.createElement(CardHeadline, {}, "Lorem ipsum dolor!"),
+        React.createElement(Button, {isSelected: true}, "I am selected"),
 				React.createElement(
 					CardCopy,
 					{},

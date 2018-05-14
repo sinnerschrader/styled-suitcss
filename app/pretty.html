@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Generate UI kits with React</title>
-    <style data-styled-uikit="Card,Image,Icon,Copy,Svg,Path,Headline,Button,Card--blue,Card--purple,Card--white,Card--success,Card--yellow,Image--fix,Card--warning,Button-Icon,MY_NAMESPACE-Layout,Card-Image,Icon-Svg,Card-Button,Card-Headline,Card-Copy,MY_NAMESPACE-Layout--4,Card-Image--small,Card-Button--icon|Animation-Blink,Animation-Shake">
+    <style data-styled-suitcss="Card,Headline,Icon,Button,Svg,Path,Image,Copy,Image--fix,Card--blue,Card--white,Card--success,Card--yellow,Card--purple,Card--warning,Button-Icon,Card-Headline,Card-Button,Icon-Svg,Card-Image,Card-Copy,MY_NAMESPACE-Layout,MY_NAMESPACE-Layout--4,Card-Image--small,Card-Button--icon|Animation-Blink,Animation-Shake">
       .Card {
         display: -webkit-box;
         display: -webkit-flex;
@@ -21,8 +21,9 @@
         box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
       }
 
-      .Image {
-        display: block;
+      .Headline {
+        margin: 0;
+        font-size: 2rem;
       }
 
       .Icon {
@@ -30,23 +31,6 @@
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
         display: inline-flex;
-      }
-
-      .Copy {
-        margin: 0;
-      }
-
-      .Svg {
-        overflow: visible;
-      }
-
-      .Path {
-        fill: currentColor;
-      }
-
-      .Headline {
-        margin: 0;
-        font-size: 2rem;
       }
 
       .Button {
@@ -98,13 +82,31 @@
         animation: Animation-Shake 0.5s ease-in-out infinite alternate;
       }
 
-      .Card--blue {
-        background-color: hsla(220, 50%, 50%, 1);
-        color: #fff;
+      .Svg {
+        overflow: visible;
       }
 
-      .Card--purple {
-        background-color: hsla(-60, 50%, 50%, 1);
+      .Path {
+        fill: currentColor;
+      }
+
+      .Image {
+        display: block;
+      }
+
+      .Copy {
+        margin: 0;
+      }
+
+      .Image--fix {
+        width: calc(100% + 2rem);
+        margin: -1rem -1rem 1rem -1rem;
+        height: auto;
+        border-radius: 3px 3px 0 0;
+      }
+
+      .Card--blue {
+        background-color: hsla(220, 50%, 50%, 1);
         color: #fff;
       }
 
@@ -123,11 +125,9 @@
         color: #000;
       }
 
-      .Image--fix {
-        width: calc(100% + 2rem);
-        margin: -1rem -1rem 1rem -1rem;
-        height: auto;
-        border-radius: 3px 3px 0 0;
+      .Card--purple {
+        background-color: hsla(-60, 50%, 50%, 1);
+        color: #fff;
       }
 
       .Card--warning {
@@ -139,17 +139,8 @@
         margin-right: 0.5em;
       }
 
-      .MY_NAMESPACE-Layout {
-        display: grid;
-      }
-
-      .Card-Image {
-        width: 100%;
-      }
-
-      .Icon-Svg {
-        height: 1em;
-        width: 1em;
+      .Card-Headline {
+        margin-bottom: 1rem;
       }
 
       .Card-Button {
@@ -161,12 +152,21 @@
         justify-content: center;
       }
 
-      .Card-Headline {
-        margin-bottom: 1rem;
+      .Icon-Svg {
+        height: 1em;
+        width: 1em;
+      }
+
+      .Card-Image {
+        width: 100%;
       }
 
       .Card-Copy {
         font-size: 1rem;
+      }
+
+      .MY_NAMESPACE-Layout {
+        display: grid;
       }
 
       .MY_NAMESPACE-Layout--4 {
@@ -246,6 +246,7 @@
       <div class="MY_NAMESPACE-Layout MY_NAMESPACE-Layout--4" data-reactroot="">
         <div data-attribute="It Works!" class="Card Card--blue">
           <h2 class="Headline Card-Headline">Lorem ipsum dolor!</h2>
+          <button class="Button">I am selected</button>
           <p class="Copy Card-Copy">
             <img src="https://placehold.it/300x300/392929/bababf" alt="Placeholder image" class="Image Card-Image Card-Image--small" />Consectetur adipisicing elit accusantium aliquam consequuntur, dolore dolorem esse eum itaque iure laudantium, magnam provident quis soluta vel voluptates? Nam numquam pariatur quam repellendus soluta.
             <!-- -->Architecto consequuntur eligendi, et ex fugit libero officia, quas quis quos ratione reprehenderit sed tempore vero. Deserunt ducimus expedita libero nam quaerat.
