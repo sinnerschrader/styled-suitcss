@@ -1,11 +1,7 @@
-# styled-uikit
-
-Generate UIkits with [react.js](https://reactjs.org/)
-
-Sometimes we don't have the option to use [React](https://reactjs.org/) for projects.
+# styled-suitcss
 
 This library attempts to solve a specific problem:  
-> **Generating UIkits via [React.js](https://reactjs.org/) with the flavor of [styled-components](https://github.com/styled-components/styled-components)**
+> **Create UIkits via [React.js](https://reactjs.org/) with the flavor of [styled-components](https://github.com/styled-components/styled-components) and  [suitcss naming](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md)**
 
 ## Info
 

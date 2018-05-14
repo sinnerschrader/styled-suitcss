@@ -1,6 +1,6 @@
 {
-  "name": "styled-uikit",
-  "version": "1.0.0",
+  "name": "styled-suitcss",
+  "version": "0.1.0",
   "main": "lib/server.js",
   "browser": "lib/client.js",
   "repository": "git@github.com:sinnerschrader/styled-ui.git",
@@ -10,15 +10,16 @@
   ],
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --hot",
-    "gh-pages": "cross-env NODE_ENV=production yarn build && cross-env NODE_ENV=production webpack",
     "build": "tsc && yarn build:ssr",
-    "build:watch": "tsc --watch --sourceMap --declaration",
+    "build:watch": "tsc --watch",
     "build:ssr": "node app/server.js",
     "clean": "rimraf lib",
-    "prebuild": "yarn clean",
     "dev": "yarn build && concurrently 'yarn build:watch' 'yarn start'",
-    "format": "prettier '{app,src}/**/*.{t,j}{s,sx}' --write"
+    "format": "prettier '{app,src}/**/*.{t,j}{s,sx}' --write",
+    "gh-pages": "cross-env NODE_ENV=production yarn build && cross-env NODE_ENV=production webpack",
+    "prebuild": "yarn clean",
+    "release": "standard-version",
+    "start": "webpack-dev-server --hot"
   },
   "peerDependencies": {
     "react": "^16.3.2",
@@ -42,6 +43,7 @@
     "react": "16.3.2",
     "react-dom": "16.3.2",
     "rimraf": "^2.6.2",
+    "standard-version": "^4.3.0",
     "typescript": "^2.8.3",
     "webpack": "^4.8.2",
     "webpack-cli": "^2.1.3",

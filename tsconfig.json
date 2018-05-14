@@ -9,6 +9,7 @@
     "outDir": "lib",
     "jsx": "react",
     "watch": false,
-    "declaration": true
+    "declaration": true,
+    "sourceMap": true
   }
 }
