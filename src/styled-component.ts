@@ -18,6 +18,7 @@ export interface InitialProps {
 	_name: string;
 	_names: string[];
 	_children?: any;
+    listeners?: string[];
 }
 
 export declare type CreateElement = (
@@ -26,6 +27,18 @@ export declare type CreateElement = (
 	tagName: any,
 	initialProps: InitialProps
 ) => any;
+
+const scopedProps: string[] = [
+    "className",
+    "_name",
+    "listeners",
+    "children",
+    "_children",
+    "_names",
+    "_namespace"
+];
+
+const filterHandlers = (str: string): boolean => !isHandler(str);
 
 class StyledComponent extends React.Component<
 	InitialProps & {listeners: string[]}
@@ -80,7 +93,7 @@ class StyledComponent extends React.Component<
 	 */
 	handleArgFn(arg: StyleInterpolation): string {
 		if (this.state._mounted) {
-			this.setState(arg(this.props));
+			this.setState(arg({listeners: this.initialProps.listeners, ...this.props}));
 		}
 		return "";
 	}
@@ -104,7 +117,8 @@ class StyledComponent extends React.Component<
 	 */
 
 	get style(): string {
-		return this.strings
+		const listeners = (this.initialProps.listeners || this.props.listeners);
+        return this.strings
 			.map((str: string, i: number) => {
 				const arg: any = this.args[i];
 				const injection: string =
@@ -112,7 +126,7 @@ class StyledComponent extends React.Component<
 				return [str, injection];
 			})
 			.concat([
-				this.props.listeners ? this.handleArgFn(this.handleState) : null
+				listeners ? this.handleArgFn(this.handleState) : null
 			])
 			.reduce(
 				(prev: string[], current: string[]) => prev.concat(current),
@@ -137,16 +151,8 @@ class StyledComponent extends React.Component<
 						? this.initialProps._children(
 								removeProps(
 									this.props,
-									[
-										"className",
-										"_name",
-										"listeners",
-										"children",
-										"_children",
-										"_names",
-										"_namespace"
-									],
-									(str: string) => !isHandler(str)
+									scopedProps,
+									filterHandlers
 								)
 						  )
 						: this.initialProps._children
