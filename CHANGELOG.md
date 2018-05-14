@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0-aplha.1"></a>
+# [1.0.0-aplha.1](https://github.com/sinnerschrader/styled-ui/compare/v1.0.0-aplha.0...v1.0.0-aplha.1) (2018-05-14)
+
+
+
 <a name="1.0.0-aplha.0"></a>
 # [1.0.0-aplha.0](https://github.com/sinnerschrader/styled-ui/compare/v1.0.0-alpha.0...v1.0.0-aplha.0) (2018-05-14)
 
