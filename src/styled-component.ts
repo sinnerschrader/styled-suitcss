@@ -6,8 +6,9 @@ import {
 	removeProps,
 	addNamespace,
 	isHandler,
+	isState,
 	updateStyles,
-	kebapCase
+	stateCase
 } from "./utils";
 import validify from "./get-valid-atrributes";
 import {StyleStore} from "./store";
@@ -46,7 +47,7 @@ class StyledComponent extends React.Component<
 	state: {_mounted?: boolean} = {
 		...(this.props.listeners
 			? this.props.listeners
-					.map(x => ({[kebapCase(x)]: this.props[x]}))
+					.map(x => ({[stateCase(x)]: this.props[x]}))
 					.reduce((a, b) => ({...a, ...b}), {})
 			: {})
 	};
@@ -76,7 +77,7 @@ class StyledComponent extends React.Component<
 	}
 
 	componentDidUpdate(oldProps) {
-		const {listeners} = this.props;
+		const listeners = this.listeners;
 		if (listeners && listeners.length > 0) {
 			listeners.forEach((listener: string) => {
 				if (oldProps[listener] !== this.props[listener]) {
@@ -93,9 +94,13 @@ class StyledComponent extends React.Component<
 	 */
 	handleArgFn(arg: StyleInterpolation): string {
 		if (this.state._mounted) {
-			this.setState(arg({listeners: this.initialProps.listeners, ...this.props}));
+            const listeners = this.listeners.map(listener => ({
+                [stateCase(listener)]: this.props[listener]
+            })).reduce((a: {}, b: {}): {} => ({...a, ...b}), {});
+			this.setState({...listeners});
 		}
-		return "";
+
+        return "";
 	}
 
 	/**
@@ -105,9 +110,6 @@ class StyledComponent extends React.Component<
 	 */
 	private handleState(props: {listeners: string[]}): {} {
 		return props.listeners
-			.map((prop: string): {} => ({
-				[kebapCase(prop)]: props[prop]
-			}))
 			.reduce((a: {}, b: {}): {} => ({...a, ...b}), {});
 	}
 
@@ -117,23 +119,23 @@ class StyledComponent extends React.Component<
 	 */
 
 	get style(): string {
-		const listeners = (this.initialProps.listeners || this.props.listeners);
         return this.strings
 			.map((str: string, i: number) => {
 				const arg: any = this.args[i];
 				const injection: string =
 					typeof arg === "function" ? this.handleArgFn(arg) : arg;
-				return [str, injection];
+				return [str, injection].filter(Boolean);
 			})
 			.concat([
-				listeners ? this.handleArgFn(this.handleState) : null
+				this.listeners.length ? this.handleArgFn(this.handleState) : ""
 			])
-			.reduce(
-				(prev: string[], current: string[]) => prev.concat(current),
-				[]
-			)
+			.reduce((a, b) => a.concat(b), [])
 			.filter(x => !isTruthy(x))
 			.join("");
+	}
+
+	get listeners () {
+		return Object.keys(this.mergedProps).filter(isState);
 	}
 
 	/**

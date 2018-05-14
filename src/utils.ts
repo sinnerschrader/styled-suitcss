@@ -115,8 +115,19 @@ export const sortByNames: (a: string, b: string) => number = (
  * @returns {boolean}
  */
 export const isHandler: (str: string) => boolean = (str: string): boolean => {
-	const [o, n, E] = str.split("");
-	return o + n === "on" && isUpperCase(E);
+    const [o, n, event] = str.split("");
+    return o + n === "on" && isUpperCase(event);
+};
+
+
+/**
+ *
+ * @param {string} str
+ * @returns {boolean}
+ */
+export const isState: (str: string) => boolean = (str: string): boolean => {
+    const [i, s, state] = str.split("");
+    return i + s === "is" && isUpperCase(state);
 };
 
 /**
@@ -227,10 +238,23 @@ export const updateStyles: (
  * @returns {string}
  */
 export const kebapCase: (str: string) => string = (str: string): string =>
-	str
-		.split("")
-		.map(
-			(char: string) =>
-				isUpperCase(char) ? `-${char.toLowerCase()}` : char
-		)
-		.join("");
+    str
+        .split("")
+        .map(
+            (char: string) =>
+                isUpperCase(char) ? `-${char.toLowerCase()}` : char
+        )
+        .join("");
+
+
+/**
+ *
+ * @param {string} str
+ * @returns {string}
+ */
+export const stateCase: (str: string) => string = (str: string): string =>
+    str
+        .replace(/^is([A-Z])/, (original, _1, _2) => {
+            return `is-${_1.toLowerCase()}`
+        })
+

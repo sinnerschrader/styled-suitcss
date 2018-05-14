@@ -1,6 +1,6 @@
 import StyledComponent, {
-	InitialProps,
-	StyleInterpolation
+	StyleInterpolation,
+    InitialProps
 } from "./styled-component";
 import Store, {StyleStore} from "./store";
 import extendComponent, {ExtendComponent} from "./extend-component";

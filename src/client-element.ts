@@ -5,6 +5,7 @@ import StyledComponent, {
 } from "./styled-component";
 import Store, {StyleStore} from "./store";
 import extendComponent, {ExtendComponent} from "./extend-component";
+import {updateStyles} from "./utils";
 
 import keyframeCreator from "./keyframes";
 
