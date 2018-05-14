@@ -1,6 +1,6 @@
 {
   "name": "styled-suitcss",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-aplha.0",
   "main": "lib/server.js",
   "browser": "lib/client.js",
   "repository": "git@github.com:sinnerschrader/styled-ui.git",

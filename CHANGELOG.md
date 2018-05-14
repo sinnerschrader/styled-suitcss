@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0-aplha.0"></a>
+# [1.0.0-aplha.0](https://github.com/sinnerschrader/styled-ui/compare/v1.0.0-alpha.0...v1.0.0-aplha.0) (2018-05-14)
+
+
+### Bug Fixes
+
+* allow state-names on base components ([b0c6a48](https://github.com/sinnerschrader/styled-ui/commit/b0c6a48))
+
+
+
 <a name="1.0.0-alpha.0"></a>
 # 1.0.0-alpha.0 (2018-05-14)
 
