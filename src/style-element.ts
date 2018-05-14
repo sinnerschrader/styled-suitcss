@@ -1,6 +1,6 @@
 /* global document */
 
-export const NAMESPACE = "data-styled-uikit";
+export const NAMESPACE = "data-styled-suitcss";
 const styleElement = (doc: any): Element => {
 	if (doc === null) {
 		return null;
