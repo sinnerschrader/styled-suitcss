@@ -1,5 +1,10 @@
 # styled-suitcss
 
+```shell
+npm install styled-suitcss
+## yarn add styled-suitcss 
+```
+
 This library attempts to solve a specific problem:  
 > **Create UIkits via [React.js](https://reactjs.org/) with the flavor of [styled-components](https://github.com/styled-components/styled-components) and  [suitcss naming](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md)**
 
@@ -16,11 +21,21 @@ This library attempts to solve a specific problem:
 > This library does not use [styled-components](https://github.com/styled-components/styled-components).  
 > It attempts to mock certain API points but only supports some basic features (some modified)
 
+## CLI tool
+
+```shell
+  extract-styled-suitcss "lib/patterns/**/*.js"
+```
+
+## Examples
+
+### JSX input
+
 ```jsx
-import styled, {keyframes} from 'styled-uikit';
+import styled, {keyframes} from 'styled-suitcss';
 import {colors} from './designkit';
 
-export const Card = styled.artice({
+export const Card = styled.article({
   _name: "Card"
 })`
   margin: 1em;
@@ -44,7 +59,7 @@ const blink = keyframes({
 `;
 
 export const Button = styled.button({
-    _name: "button"
+    _name: "Button"
 })`
     padding: 0.5em 1em;
     margin: 0.5em;
@@ -94,13 +109,90 @@ export const PrimaryCardButton = PrimaryButton.extend({
 
 ```
 
-## HTML snippets
+
+### HTML snippets
+
+> one file per snippet
 
 ```html
-<button class="Button">Click Me!</button>
-<button class="Button Button--primary">Click Me!</button>
-<article class="Card">
-  <button class="Button Card-Button">Cancel</button>
-  <button class="Button Button--primary Card-Button--primary">Submit</button>
-</article>
+<button class="Button is-selected"></button>
+<button class="Button Button--primary is-blinking"></button>
+<article class="Card"></article>
+<button class="Button Button--primary Card-Button--primary"></button>
+<button class="Button Card-Button"></button>
+```
+
+
+### CSS library
+
+```css
+.Button {
+    padding: 0.5em 1em;
+    margin: 0.5em;
+    background: #ddd;
+    color: #000;
+    font-size: 1em;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+}
+
+.Button:hover {
+    background-color: #ccc;
+}
+
+.Button:active {
+    background-color: #bbb;
+}
+
+.Button.is-selected {
+    box-shadow: 0 0 0 4px pink;
+}
+
+.Button.is-blinking {
+    -webkit-animation: Animation-Blink 0.5s steps(2, end) infinite alternate;
+    animation: Animation-Blink 0.5s steps(2, end) infinite alternate;
+}
+
+.Card {
+    margin: 1em;
+    padding: 1em;
+    border-radius: 3px;
+    background: #fff;
+    color: #000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.Button--primary {
+    background-color: red;
+    color: white;
+}
+
+.Card-Button {
+    width: 100%;
+    margin: 0.5em 0;
+}
+
+.Card-Button--primary {
+    width: 100%;
+    margin: 0.5em 0;
+}
+
+@-webkit-keyframes Animation-Blink {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes Animation-Blink {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
 ```
