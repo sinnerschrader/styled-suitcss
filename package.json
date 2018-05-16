@@ -1,6 +1,6 @@
 {
   "name": "styled-suitcss",
-  "version": "1.0.0-aplha.2",
+  "version": "1.0.0-aplha.3",
   "bin": {
     "extract-styled-suitcss": "tools/cli.js"
   },
