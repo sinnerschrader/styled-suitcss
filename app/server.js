@@ -31,7 +31,7 @@ writeFile(
 	path.resolve(__dirname, "index.html"),
 	minify(html, {
 		sortAttributes: true,
-		minifyCSS: true,
+		minifyCSS: false,
 		collapseWhitespace: true,
 		removeAttributeQuotes: false,
 		sortClassName: false
