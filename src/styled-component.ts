@@ -19,7 +19,7 @@ export interface InitialProps {
 	_name: string;
 	_names: string[];
 	_children?: any;
-    listeners?: string[];
+	listeners?: string[];
 }
 
 export declare type CreateElement = (
@@ -30,20 +30,18 @@ export declare type CreateElement = (
 ) => any;
 
 const scopedProps: string[] = [
-    "className",
-    "_name",
-    "listeners",
-    "children",
-    "_children",
-    "_names",
-    "_namespace"
+	"className",
+	"_name",
+	"listeners",
+	"children",
+	"_children",
+	"_names",
+	"_namespace"
 ];
 
 const filterHandlers = (str: string): boolean => !isHandler(str);
 
-class StyledComponent extends React.Component<
-	InitialProps & {listeners: string[]}
-> {
+class StyledComponent extends React.Component<InitialProps> {
 	state: {_mounted?: boolean} = {
 		...(this.props.listeners
 			? this.props.listeners
@@ -60,7 +58,7 @@ class StyledComponent extends React.Component<
 		addStyle(selector: string, style: string) {}
 	};
 
-	componentDidMount() {
+	init() {
 		const {_name, _names = [], _namespace} = this.initialProps;
 		const [name] = _names;
 		updateStyles({name, _name}, _namespace, _names, (selector: string) => {
@@ -74,6 +72,12 @@ class StyledComponent extends React.Component<
 				this.style;
 			}
 		);
+	}
+	UNSAFE_componentWillMount() {
+		this.init();
+	}
+	componentDidMount() {
+		this.init();
 	}
 
 	componentDidUpdate(oldProps) {
@@ -94,13 +98,15 @@ class StyledComponent extends React.Component<
 	 */
 	handleArgFn(arg: StyleInterpolation): string {
 		if (this.state._mounted) {
-            const listeners = this.listeners.map(listener => ({
-                [stateCase(listener)]: this.props[listener]
-            })).reduce((a: {}, b: {}): {} => ({...a, ...b}), {});
+			const listeners = this.listeners
+				.map(listener => ({
+					[stateCase(listener)]: this.props[listener]
+				}))
+				.reduce((a: {}, b: {}): {} => ({...a, ...b}), {});
 			this.setState({...listeners});
 		}
 
-        return "";
+		return "";
 	}
 
 	/**
@@ -109,8 +115,7 @@ class StyledComponent extends React.Component<
 	 * @returns {{}}
 	 */
 	private handleState(props: {listeners: string[]}): {} {
-		return props.listeners
-			.reduce((a: {}, b: {}): {} => ({...a, ...b}), {});
+		return props.listeners.reduce((a: {}, b: {}): {} => ({...a, ...b}), {});
 	}
 
 	/**
@@ -119,7 +124,7 @@ class StyledComponent extends React.Component<
 	 */
 
 	get style(): string {
-        return this.strings
+		return this.strings
 			.map((str: string, i: number) => {
 				const arg: any = this.args[i];
 				const injection: string =
@@ -134,7 +139,7 @@ class StyledComponent extends React.Component<
 			.join("");
 	}
 
-	get listeners () {
+	get listeners() {
 		return Object.keys(this.mergedProps).filter(isState);
 	}
 
@@ -143,7 +148,7 @@ class StyledComponent extends React.Component<
 	 * @returns {object}
 	 */
 	private get mergedProps(): object &
-		InitialProps & {children: any; className: string; listeners: string[]} {
+		InitialProps & {children: any; className: string} {
 		return {
 			...this.initialProps,
 			...this.props,

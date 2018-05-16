@@ -1,6 +1,6 @@
 import StyledComponent, {
 	StyleInterpolation,
-    InitialProps
+	InitialProps
 } from "./styled-component";
 import Store, {StyleStore} from "./store";
 import extendComponent, {ExtendComponent} from "./extend-component";
@@ -28,20 +28,6 @@ const create = (
 		args: (string | StyleInterpolation)[] = args;
 		tag: any = tag;
 		store: StyleStore = store;
-
-		constructor(props: any) {
-			super(props);
-			const {_name, _names = [], _namespace} = initialProps;
-			const [name] = _names;
-			updateStyles(
-				{name, _name},
-				_namespace,
-				_names,
-				(selector: string) => {
-					this.store.addStyle(selector, this.style);
-				}
-			);
-		}
 	}
 
 	return Component;

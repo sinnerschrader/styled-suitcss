@@ -1,6 +1,7 @@
 import styleElement, {NAMESPACE} from "./style-element";
 import {sortByNames} from "./utils";
 const Stylis = require("stylis");
+import {SEPARATOR} from "./constants";
 
 export declare type AddStyle = (selector: string, style: string) => void;
 
@@ -44,7 +45,7 @@ class Store {
 			const [
 				styles = "",
 				animations = ""
-			] = this.styleElement.innerHTML.split(".___{content:normal}");
+			] = this.styleElement.innerHTML.split(SEPARATOR);
 			this.selectors = selectors.split(",");
 			this.keyframes = keyframes.split(",");
 			this.styles.push(styles);
@@ -65,7 +66,9 @@ class Store {
 	addStyle(selector: string, style: string) {
 		if (!this.selectors.includes(selector)) {
 			this.selectors.push(selector);
-			this.styles.push(stylis(`.${selector}`, style));
+			this.styles.push(
+				`/* ${selector} */\n${stylis(`.${selector}`, style)}`
+			);
 			this.styles = this.styles.sort(sortByNames);
 			this.selectors = this.selectors.sort(sortByNames);
 			this.updateStyleSheet();
@@ -75,7 +78,9 @@ class Store {
 	addKeyframes(name: string, style: string) {
 		if (!this.keyframes.includes(name)) {
 			this.keyframes.push(name);
-			this.animations.push(stylis("", `@keyframes ${name} {${style}`));
+			this.animations.push(
+				`/* ${name} */\n${stylis("", `@keyframes ${name} {${style}`)}`
+			);
 			this.animations = this.animations.sort(sortByNames);
 			this.keyframes = this.keyframes.sort(sortByNames);
 			this.updateStyleSheet();
@@ -86,7 +91,7 @@ class Store {
 		if (this.styleElement) {
 			this.styleElement.innerHTML = this.styles
 				.concat(this.animations)
-				.join("");
+				.join("\n");
 		}
 	}
 

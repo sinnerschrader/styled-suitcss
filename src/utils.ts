@@ -72,22 +72,37 @@ export const oneOf: (
 		.map(({check, value}) => (check === undefined ? null : value))
 		.filter(Boolean)[0];
 
-const patterns = [
-	/([\w]+)-([\w]+)--([\w]+)/,
-	/([\w]+)-([\w]+)/,
-	/([\w]+)--([\w]+)/,
-	/([\w]+)/
+export const patterns = [
+	/([A-Z][a-zA-Z]+)-([A-Z][a-zA-Z]+)--([a-z][a-zA-Z0-9]+)/,
+	/([A-Z][a-zA-Z]+)-([A-Z][a-zA-Z]+)/,
+	/([A-Z][a-zA-Z]+)--([a-z][a-zA-Z0-9]+)/,
+	/([A-Z][a-zA-Z]+)/
 ];
 
-const orderByPattern = (name: string, patterns: RegExp[]): number => {
+export const getOrderFromPattern = (
+	name: string,
+	patterns: RegExp[]
+): number => {
 	let counter: number = 0;
 	let match: string[] | null = null;
-	while (!match && counter < patterns.length) {
+	const length: number = patterns.length;
+	while (!match && counter < length) {
 		match = name.match(patterns[counter]);
 		++counter;
 	}
-	return patterns.length - counter;
+	return length - counter;
 };
+
+/**
+ *
+ * @param {string} str
+ * @returns {string}
+ */
+export const cleanName: (str: string) => string = (str: string): string =>
+	str
+		.split("{")[0]
+		.trim()
+		.replace(/^[a-z]+-+/, "");
 
 /**
  *
@@ -104,9 +119,10 @@ export const sortByNames: (a: string, b: string) => number = (
 	a: string,
 	b: string
 ): number => {
-	const [aName] = a.split("{");
-	const [bName] = b.split("{");
-	return orderByPattern(aName, patterns) - orderByPattern(bName, patterns);
+	return (
+		getOrderFromPattern(cleanName(a), patterns) -
+		getOrderFromPattern(cleanName(b), patterns)
+	);
 };
 
 /**
@@ -115,10 +131,9 @@ export const sortByNames: (a: string, b: string) => number = (
  * @returns {boolean}
  */
 export const isHandler: (str: string) => boolean = (str: string): boolean => {
-    const [o, n, event] = str.split("");
-    return o + n === "on" && isUpperCase(event);
+	const [o, n, event] = str.split("");
+	return o + n === "on" && isUpperCase(event);
 };
-
 
 /**
  *
@@ -126,8 +141,8 @@ export const isHandler: (str: string) => boolean = (str: string): boolean => {
  * @returns {boolean}
  */
 export const isState: (str: string) => boolean = (str: string): boolean => {
-    const [i, s, state] = str.split("");
-    return i + s === "is" && isUpperCase(state);
+	const [i, s, state] = str.split("");
+	return i + s === "is" && isUpperCase(state);
 };
 
 /**
@@ -226,7 +241,7 @@ export const updateStyles: (
 		case 1:
 			addStyle(_name);
 			break;
-		default:
+		case 2:
 			addStyle(name);
 			break;
 	}
@@ -238,14 +253,13 @@ export const updateStyles: (
  * @returns {string}
  */
 export const kebapCase: (str: string) => string = (str: string): string =>
-    str
-        .split("")
-        .map(
-            (char: string) =>
-                isUpperCase(char) ? `-${char.toLowerCase()}` : char
-        )
-        .join("");
-
+	str
+		.split("")
+		.map(
+			(char: string): string =>
+				isUpperCase(char) ? `-${char.toLowerCase()}` : char
+		)
+		.join("");
 
 /**
  *
@@ -253,8 +267,6 @@ export const kebapCase: (str: string) => string = (str: string): string =>
  * @returns {string}
  */
 export const stateCase: (str: string) => string = (str: string): string =>
-    str
-        .replace(/^is([A-Z])/, (original, _1, _2) => {
-            return `is-${_1.toLowerCase()}`
-        })
-
+	str.replace(/^is([A-Z])/, (original: string, $1: string): string => {
+		return `is-${$1.toLowerCase()}`;
+	});
