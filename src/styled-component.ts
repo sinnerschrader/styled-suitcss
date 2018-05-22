@@ -78,6 +78,7 @@ class StyledComponent extends React.Component<InitialProps> {
 			},
 			() => {
 				this.style;
+				console.log(this.state);
 			}
 		);
 	}

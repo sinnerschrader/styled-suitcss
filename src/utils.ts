@@ -63,13 +63,20 @@ export const addNamespace: (
 	namespace: string | undefined,
 	parent: string | undefined
 ): string => {
-	if (namespace) {
-		return `${namespace}-${name}`;
+	if (name) {
+		if (namespace) {
+			const prefix = `${namespace}-`;
+			if (name.match(new RegExp(`^${prefix}`))) {
+				return name;
+			}
+			return `${prefix}${name}`;
+		}
+		if (parent) {
+			return `${parent}-${camelCase(name)}`;
+		}
+		return name;
 	}
-	if (parent) {
-		return `${parent}-${camelCase(name)}`;
-	}
-	return name;
+	return null;
 };
 
 /**

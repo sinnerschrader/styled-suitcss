@@ -35,7 +35,8 @@ const extendComponent = (
 			{
 				check: props._namespace,
 				value: `${props._namespace}-${initialProps._name}`
-			}
+			},
+			{check: _name, value: _name}
 		);
 		const mergedProps = {
 			...initialProps,
