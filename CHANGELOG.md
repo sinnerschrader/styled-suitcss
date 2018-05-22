@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/sinnerschrader/styled-ui/compare/v1.0.0-aplha.3...v1.0.0) (2018-05-22)
+
+
+### Bug Fixes
+
+* generate better names. ([d374d27](https://github.com/sinnerschrader/styled-ui/commit/d374d27))
+
+
+### Features
+
+* **cli:** added cli tool ([e65dbb9](https://github.com/sinnerschrader/styled-ui/commit/e65dbb9))
+
+
+
 <a name="1.0.0-aplha.3"></a>
 # [1.0.0-aplha.3](https://github.com/sinnerschrader/styled-ui/compare/v1.0.0-aplha.2...v1.0.0-aplha.3) (2018-05-16)
 
