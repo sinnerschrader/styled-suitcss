@@ -14,17 +14,31 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "tsc && yarn build:ssr",
-    "tsc": "tsc",
+    "build": "tsc && yarn build:ssr; yarn build:examples",
+    "build:examples": "node tools/cli 'examples/src/**/*.js' -o examples/dist",
     "build:watch": "tsc --watch",
     "build:ssr": "node app/server.js",
-    "clean": "rimraf lib",
+    "clean": "yarn clean:lib; yarn clean:examples",
+    "clean:lib": "rimraf lib",
+    "clean:examples": "rimraf examples/dist",
     "dev": "yarn build && concurrently 'yarn build:watch' 'yarn start'",
-    "format": "prettier '{app,src,tools}/**/*.{t,j}{s,sx}' --write",
+    "format": "yarn format:md; yarn format:js; yarn format:ts; yarn format:css; yarn format:json",
+    "format:json": "prettier package.json tsconfig.json .babelrc '{app,src,tools,examples/src}/**/*.json' --parser json --write",
+    "format:css": "prettier '{app,src,tools,examples/src}/**/*.css' --parser postcss --write",
+    "format:js": "prettier .prettierrc.js webpack.config.js '{app,src,tools,examples/src}/**/*.js' --parser babylon --write",
+    "format:ts": "prettier '{app,src,tools,examples/src}/**/*.ts' --write",
+    "format:md": "prettier Readme.md '{app,src,tools,examples/src}/**/*.md' --parser markdown --write",
     "gh-pages": "cross-env NODE_ENV=production yarn build && cross-env NODE_ENV=production webpack",
     "prebuild": "yarn clean",
     "release": "standard-version",
-    "start": "webpack-dev-server --hot"
+    "start": "webpack-dev-server --hot",
+    "test": "ava 'test/**/*.js'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn test",
+      "pre-release": "yarn tsc"
+    }
   },
   "peerDependencies": {
     "react": "^16.3.2",
@@ -38,12 +52,14 @@
     "@types/classnames": "^2.2.3",
     "@types/react": "^16.3.13",
     "@types/react-dom": "^16.0.5",
+    "ava": "^1.0.0-beta.4",
     "babel-loader": "^8.0.0-beta.2",
     "concurrently": "^3.5.1",
     "cross-env": "^5.1.5",
     "html-minifier": "^3.5.15",
     "html-webpack-harddisk-plugin": "^0.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^0.14.3",
     "prettier": "^1.12.1",
     "standard-version": "^4.3.0",
     "typescript": "^2.8.3",
@@ -52,15 +68,19 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
+    "camelcase": "^5.0.0",
     "classnames": "^2.2.5",
     "cssbeautify": "^0.3.1",
+    "decamelize": "^2.0.0",
     "globby": "^8.0.1",
+    "mkdirp": "^0.5.1",
     "pify": "^3.0.0",
     "pretty": "^2.0.0",
     "react": "16.3.2",
     "react-dom": "16.3.2",
     "rimraf": "^2.6.2",
     "stylis": "^3.5.0",
-    "tslib": "^1.9.0"
+    "tslib": "^1.9.0",
+    "winston": "^3.0.0-rc5"
   }
 }
