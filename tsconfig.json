@@ -1,15 +1,15 @@
 {
-  "compilerOptions": {
-    "alwaysStrict": true,
-    "importHelpers": true,
-    "lib": ["dom", "es5", "es2015.core", "es6", "es7"],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "target": "es5",
-    "outDir": "lib",
-    "jsx": "react",
-    "watch": false,
-    "declaration": true,
-    "sourceMap": true
-  }
+	"compilerOptions": {
+		"alwaysStrict": true,
+		"importHelpers": true,
+		"lib": ["dom", "es5", "es2015.core", "es6", "es7"],
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"target": "es5",
+		"outDir": "lib",
+		"jsx": "react",
+		"watch": false,
+		"declaration": true,
+		"sourceMap": true
+	}
 }

@@ -1,7 +1,7 @@
 {
-  "presets": [
-    ["@babel/stage-2", { "decoratorsLegacy": true }],
-    "@babel/react",
-    "@babel/env"
-  ],
+	"presets": [
+		["@babel/stage-2", {"decoratorsLegacy": true}],
+		"@babel/react",
+		"@babel/env"
+	]
 }
