@@ -18,13 +18,15 @@ styled.ServerStyleSheet = class ServerStyleSheet {
 		return `<style ${NAMESPACE}="${selectors}|${keyframes}">${styles}\n${SEPARATOR}\n${animations}</style>`;
 	}
 	getStyles(): string {
-		const selectors = store.selectors.join(",");
-		const keyframes = store.keyframes.join(",");
 		const styles = store.styles.join("\n");
 		const animations = store.animations.join("\n");
 		return `${styles}\n${animations}`;
 	}
 	collectStyles(input: any): any {
+		store.selectors = [];
+		store.keyframes = [];
+		store.styles = [];
+		store.animations = [];
 		return input;
 	}
 };

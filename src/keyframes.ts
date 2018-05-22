@@ -10,17 +10,21 @@ import {StyleStore} from "./store";
  */
 const keyframes: (
 	store: StyleStore,
-	options: {_name: string; _namespace?: string}
+	options: {_name: string; _namespace?: string; _parent?: string}
 ) => (strings: string[], ...args: (string | StyleInterpolation)[]) => any = (
 	store: StyleStore,
-	options: {_name: string; _namespace?: string}
+	options: {_name: string; _namespace?: string; _parent?: string}
 ) => (strings: string[], ...args: (string | StyleInterpolation)[]): string => {
 	const style = strings
 		.map((str: string, index: number): string => {
 			return [str, args[index]].filter(Boolean).join("");
 		})
 		.join("");
-	const name = addNamespace(options._name, options._namespace);
+	const name = addNamespace(
+		options._name,
+		options._namespace,
+		options._parent
+	);
 	store.addKeyframes(name, style);
 	return name;
 };

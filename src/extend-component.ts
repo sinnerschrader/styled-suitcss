@@ -1,3 +1,4 @@
+const camelCase = require("camelcase");
 import {oneOf} from "./utils";
 import {StyleInterpolation, InitialProps} from "./styled-component";
 export declare type ExtensionCreator = (
@@ -21,14 +22,25 @@ const extendComponent = (
 ): ExtendComponent => (props: InitialProps) => {
 	return (extension: string[] = [], ...args: string[]): ExtensionCreator => {
 		const _name: string = `${initialProps._name}--${props._name}`;
-		const _namespace: string = `${props._namespace}-${initialProps._name}`;
+		const _parent =
+			typeof props._parent === "function"
+				? props._parent.suitcssId
+				: props._parent;
 		const nextName = oneOf(
 			{check: props._name, value: _name},
-			{check: props._namespace, value: _namespace}
+			{
+				check: _parent,
+				value: `${_parent}-${camelCase(initialProps._name)}`
+			},
+			{
+				check: props._namespace,
+				value: `${props._namespace}-${initialProps._name}`
+			}
 		);
 		const mergedProps = {
 			...initialProps,
 			...props,
+			_parent: "",
 			_children: props._children,
 			_name: nextName,
 			_names: [...(initialProps._names || []), nextName]

@@ -18,6 +18,7 @@ export interface InitialProps {
 	_namespace?: string | undefined;
 	_name: string;
 	_names: string[];
+	_parent?: any;
 	_children?: any;
 	listeners?: string[];
 }
@@ -31,10 +32,11 @@ export declare type CreateElement = (
 
 const scopedProps: string[] = [
 	"className",
-	"_name",
 	"listeners",
 	"children",
 	"_children",
+	"_parent",
+	"_name",
 	"_names",
 	"_namespace"
 ];
@@ -59,11 +61,17 @@ class StyledComponent extends React.Component<InitialProps> {
 	};
 
 	init() {
-		const {_name, _names = [], _namespace} = this.initialProps;
+		const {_name, _names = [], _namespace, _parent} = this.initialProps;
 		const [name] = _names;
-		updateStyles({name, _name}, _namespace, _names, (selector: string) => {
-			this.store.addStyle(selector, this.style);
-		});
+		updateStyles(
+			{name, _name},
+			_namespace,
+			_parent,
+			_names,
+			(selector: string) => {
+				this.store.addStyle(selector, this.style);
+			}
+		);
 		this.setState(
 			{
 				_mounted: true
@@ -76,14 +84,14 @@ class StyledComponent extends React.Component<InitialProps> {
 	UNSAFE_componentWillMount() {
 		this.init();
 	}
+
 	componentDidMount() {
 		this.init();
 	}
 
 	componentDidUpdate(oldProps) {
-		const listeners = this.listeners;
-		if (listeners && listeners.length > 0) {
-			listeners.forEach((listener: string) => {
+		if (this.listeners && this.listeners.length > 0) {
+			this.listeners.forEach((listener: string) => {
 				if (oldProps[listener] !== this.props[listener]) {
 					this.style;
 				}
@@ -182,10 +190,15 @@ class StyledComponent extends React.Component<InitialProps> {
 					className: cx(
 						addNamespace(
 							this.initialProps._name,
-							this.initialProps._namespace
+							this.initialProps._namespace,
+							this.initialProps._parent
 						),
 						...(this.mergedProps._names || []).map((name: string) =>
-							addNamespace(name, this.initialProps._namespace)
+							addNamespace(
+								name,
+								this.initialProps._namespace,
+								this.initialProps._parent
+							)
 						),
 						{...this.state, _mounted: false}
 					)

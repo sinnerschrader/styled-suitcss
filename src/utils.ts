@@ -1,3 +1,4 @@
+const camelCase = require("camelcase");
 /**
  *
  * @param input
@@ -50,13 +51,26 @@ export const removeProps: (
  *
  * @param {string} name
  * @param {string | undefined} namespace
+ * @param {string | undefined} parent
  * @returns {string}
  */
 export const addNamespace: (
 	name: string,
-	namespace: string | undefined
-) => string = (name: string, namespace: string | undefined): string =>
-	namespace ? `${namespace}-${name}` : name;
+	namespace?: string | undefined,
+	parent?: string | undefined
+) => string = (
+	name: string,
+	namespace: string | undefined,
+	parent: string | undefined
+): string => {
+	if (namespace) {
+		return `${namespace}-${name}`;
+	}
+	if (parent) {
+		return `${parent}-${camelCase(name)}`;
+	}
+	return name;
+};
 
 /**
  *
@@ -72,11 +86,18 @@ export const oneOf: (
 		.map(({check, value}) => (check === undefined ? null : value))
 		.filter(Boolean)[0];
 
+const h = {
+	namespace: "^[a-z]([a-z0-9]+)?-",
+	ComponentName: "([A-Z]([a-zA-Z]+)?)",
+	descendentName: "([a-z]([a-zA-Z]+)?)",
+	modifierName: "([a-z]([a-zA-Z0-9]+)?)"
+};
+
 export const patterns = [
-	/([A-Z][a-zA-Z]+)-([A-Z][a-zA-Z]+)--([a-z][a-zA-Z0-9]+)/,
-	/([A-Z][a-zA-Z]+)-([A-Z][a-zA-Z]+)/,
-	/([A-Z][a-zA-Z]+)--([a-z][a-zA-Z0-9]+)/,
-	/([A-Z][a-zA-Z]+)/
+	new RegExp(`${h.ComponentName}-${h.descendentName}--${h.modifierName}`),
+	new RegExp(`${h.ComponentName}-${h.descendentName}`),
+	new RegExp(`${h.ComponentName}--${h.modifierName}`),
+	new RegExp(h.ComponentName)
 ];
 
 export const getOrderFromPattern = (
@@ -102,7 +123,7 @@ export const cleanName: (str: string) => string = (str: string): string =>
 	str
 		.split("{")[0]
 		.trim()
-		.replace(/^[a-z]+-+/, "");
+		.replace(new RegExp(h.namespace), "");
 
 /**
  *
@@ -225,18 +246,20 @@ export const styleInjection: (
 export const updateStyles: (
 	data: {name: string; _name: string},
 	_namespace: string,
+	_parent: string,
 	_names: string[],
 	addStyle: (selector: string) => void
 ) => void = (
 	data: {name: string; _name: string},
 	_namespace: string,
+	_parent: string,
 	_names: string[],
 	addStyle: (selector: string) => void
 ) => {
 	const {name, _name} = data;
 	switch (styleInjection({name, _name}, _namespace, _names)) {
 		case 0:
-			addStyle(addNamespace(_name, _namespace));
+			addStyle(addNamespace(_name, _namespace, _parent));
 			break;
 		case 1:
 			addStyle(_name);
@@ -246,20 +269,6 @@ export const updateStyles: (
 			break;
 	}
 };
-
-/**
- *
- * @param {string} str
- * @returns {string}
- */
-export const kebapCase: (str: string) => string = (str: string): string =>
-	str
-		.split("")
-		.map(
-			(char: string): string =>
-				isUpperCase(char) ? `-${char.toLowerCase()}` : char
-		)
-		.join("");
 
 /**
  *
