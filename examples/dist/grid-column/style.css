@@ -1,0 +1,10 @@
+/* Column */
+.Column {
+    -webkit-flex: 0 0 calc(100% / var(--columns,4));
+    -ms-flex: 0 0 calc(100% / var(--columns,4));
+    flex: 0 0 calc(100% / var(--columns,4));
+}
+/* s2-Grid-column */
+.s2-Grid-column {
+    --columns: 8;
+}

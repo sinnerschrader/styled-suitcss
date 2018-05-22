@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Generate UI kits with React</title>
-    <style data-styled-suitcss="nmspc-Layout--4,Button,nmspc-Layout,Image,Icon,Copy,Svg,Path,Card,Headline,Card--white,Card--success,Card--yellow,Card--blue,Image--fix,Card--purple,Card--warning,Card-Button,Card-Copy,Card-Headline,Icon-Svg,Button-Icon,Card-Image,Card-Image--small,Card-Button--icon|animation-Blink,animation-Shake">
+    <style data-styled-suitcss="nmspc-Layout--4,my-Button,nmspc-Layout,my-Image,my-Icon,my-Copy,my-Svg,my-Path,my-Card,my-Headline,my-Card--white,my-Card--success,my-Card--yellow,my-Card--blue,my-Image--fix,my-Card--purple,my-Card--warning,my-Card-button,my-Card-copy,my-Card-headline,my-Icon-svg,my-Button-icon,my-Card-image,my-Card-image--small,my-Card-button--icon|animation-Blink,animation-Shake">
       /* nmspc-Layout--4 */
 
       .nmspc-Layout--4 {
@@ -19,9 +19,9 @@
         }
       }
 
-      /* Button */
+      /* my-Button */
 
-      .Button {
+      .my-Button {
         display: -webkit-inline-box;
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
@@ -36,36 +36,36 @@
         cursor: pointer;
       }
 
-      .Button:hover {
+      .my-Button:hover {
         border-color: rgba(0, 0, 0, 0.6);
         background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
       }
 
-      .Button:active {
+      .my-Button:active {
         border-color: rgba(0, 0, 0, 0.8);
         background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
       }
 
-      .Button:focus {
+      .my-Button:focus {
         box-shadow: 0 0 3px 3px highlight;
         outline: 0;
       }
 
-      .Button.is-selected {
+      .my-Button.is-selected {
         box-shadow: 0 0 0 2px #fff, 0 0 0 5px rgba(55, 55, 255, 0.9);
         outline: 0;
       }
 
-      .Button.is-special {
+      .my-Button.is-special {
         background-color: hsla(220, 50%, 50%, 1);
       }
 
-      .Button.is-blinking {
+      .my-Button.is-blinking {
         -webkit-animation: animation-Blink 0.5s steps(2, end) infinite alternate;
         animation: animation-Blink 0.5s steps(2, end) infinite alternate;
       }
 
-      .Button.is-shaking {
+      .my-Button.is-shaking {
         -webkit-animation: animation-Shake 0.5s ease-in-out infinite alternate;
         animation: animation-Shake 0.5s ease-in-out infinite alternate;
       }
@@ -76,42 +76,42 @@
         display: grid;
       }
 
-      /* Image */
+      /* my-Image */
 
-      .Image {
+      .my-Image {
         display: block;
       }
 
-      /* Icon */
+      /* my-Icon */
 
-      .Icon {
+      .my-Icon {
         display: -webkit-inline-box;
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
         display: inline-flex;
       }
 
-      /* Copy */
+      /* my-Copy */
 
-      .Copy {
+      .my-Copy {
         margin: 0;
       }
 
-      /* Svg */
+      /* my-Svg */
 
-      .Svg {
+      .my-Svg {
         overflow: visible;
       }
 
-      /* Path */
+      /* my-Path */
 
-      .Path {
+      .my-Path {
         fill: currentColor;
       }
 
-      /* Card */
+      /* my-Card */
 
-      .Card {
+      .my-Card {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -127,67 +127,67 @@
         box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
       }
 
-      /* Headline */
+      /* my-Headline */
 
-      .Headline {
+      .my-Headline {
         margin: 0;
         font-size: 2rem;
       }
 
-      /* Card--white */
+      /* my-Card--white */
 
-      .Card--white {
+      .my-Card--white {
         color: black;
         background-color: white;
       }
 
-      /* Card--success */
+      /* my-Card--success */
 
-      .Card--success {
+      .my-Card--success {
         background-color: hsla(120, 70%, 30%, 1);
         color: #fff;
       }
 
-      /* Card--yellow */
+      /* my-Card--yellow */
 
-      .Card--yellow {
+      .my-Card--yellow {
         background-color: hsla(40, 50%, 70%, 1);
         color: #000;
       }
 
-      /* Card--blue */
+      /* my-Card--blue */
 
-      .Card--blue {
+      .my-Card--blue {
         background-color: hsla(220, 50%, 50%, 1);
         color: #fff;
       }
 
-      /* Image--fix */
+      /* my-Image--fix */
 
-      .Image--fix {
+      .my-Image--fix {
         width: calc(100% + 2rem);
         margin: -1rem -1rem 1rem -1rem;
         height: auto;
         border-radius: 3px 3px 0 0;
       }
 
-      /* Card--purple */
+      /* my-Card--purple */
 
-      .Card--purple {
+      .my-Card--purple {
         background-color: hsla(-60, 50%, 50%, 1);
         color: #fff;
       }
 
-      /* Card--warning */
+      /* my-Card--warning */
 
-      .Card--warning {
+      .my-Card--warning {
         background-color: hsla(-10, 50%, 40%, 1);
         color: #fff;
       }
 
-      /* Card-Button */
+      /* my-Card-button */
 
-      .Card-Button {
+      .my-Card-button {
         width: 100%;
         margin: 0.5em 0;
         -webkit-box-pack: center;
@@ -196,48 +196,48 @@
         justify-content: center;
       }
 
-      /* Card-Copy */
+      /* my-Card-copy */
 
-      .Card-Copy {
+      .my-Card-copy {
         font-size: 1rem;
       }
 
-      /* Card-Headline */
+      /* my-Card-headline */
 
-      .Card-Headline {
+      .my-Card-headline {
         margin-bottom: 1rem;
       }
 
-      /* Icon-Svg */
+      /* my-Icon-svg */
 
-      .Icon-Svg {
+      .my-Icon-svg {
         height: 1em;
         width: 1em;
       }
 
-      /* Button-Icon */
+      /* my-Button-icon */
 
-      .Button-Icon {
+      .my-Button-icon {
         margin-right: 0.5em;
       }
 
-      /* Card-Image */
+      /* my-Card-image */
 
-      .Card-Image {
+      .my-Card-image {
         width: 100%;
       }
 
-      /* Card-Image--small */
+      /* my-Card-image--small */
 
-      .Card-Image--small {
+      .my-Card-image--small {
         width: 50%;
         float: left;
         margin: 0 1em 1em 0;
       }
 
-      /* Card-Button--icon */
+      /* my-Card-button--icon */
 
-      .Card-Button--icon {
+      .my-Card-button--icon {
         padding-left: 0.5em;
       }
 
@@ -296,37 +296,37 @@
   <body>
     <div id="app">
       <div class="nmspc-Layout nmspc-Layout--4" data-reactroot="">
-        <div data-attribute="It Works!" class="Card Card--blue">
-          <h2 class="Headline Card-Headline">Lorem ipsum dolor!</h2>
-          <button class="Button">I am selected</button>
-          <p class="Copy Card-Copy">
-            <img src="https://placehold.it/300x300/392929/bababf" alt="Placeholder image" class="Image Card-Image Card-Image--small" />Consectetur adipisicing elit accusantium aliquam consequuntur, dolore dolorem esse eum itaque iure laudantium, magnam provident quis soluta vel voluptates? Nam numquam pariatur quam repellendus soluta.
+        <div data-attribute="It Works!" class="my-Card my-Card--blue">
+          <h2 class="my-Headline my-my-Card-headline">Lorem ipsum dolor!</h2>
+          <button class="my-Button">I am selected</button>
+          <p class="my-Copy my-my-Card-copy">
+            <img src="https://placehold.it/300x300/392929/bababf" alt="Placeholder image" class="my-Image my-my-Card-image my-my-Card-image--small" />Consectetur adipisicing elit accusantium aliquam consequuntur, dolore dolorem esse eum itaque iure laudantium, magnam provident quis soluta vel voluptates? Nam numquam pariatur quam repellendus soluta.
             <!-- -->Architecto consequuntur eligendi, et ex fugit libero officia, quas quis quos ratione reprehenderit sed tempore vero. Deserunt ducimus expedita libero nam quaerat.
             <!-- -->Ad corporis, culpa cum dolores eligendi id itaque laboriosam, molestiae necessitatibus nisi, officiis praesentium temporibus vero.
             <!-- -->Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, consequatur corporis, culpa cum earum est libero necessitatibus sit tempora ullam, vel voluptatum! Corporis cumque in minus modi repellat totam velit.</p>
         </div>
-        <div class="Card Card--purple">
-          <img src="https://placehold.it/600x300/343536/abbccd" alt="Placeholder image" class="Image Card-Image" />
+        <div class="my-Card my-Card--purple">
+          <img src="https://placehold.it/600x300/343536/abbccd" alt="Placeholder image" class="my-Image my-my-Card-image" />
         </div>
-        <div class="Card Card--white">
-          <img src="https://placehold.it/1000x400/44139a/ddd" alt="Placeholder image" class="Image Image--fix" />
-          <h2 class="Headline Card-Headline">Libero necessitatibus sit tempora!</h2>
-          <p class="Copy Card-Copy">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, consequatur corporis, culpa cum earum est libero necessitatibus sit tempora ullam, vel voluptatum! Corporis cumque in minus modi repellat totam velit.</p>
+        <div class="my-Card my-Card--white">
+          <img src="https://placehold.it/1000x400/44139a/ddd" alt="Placeholder image" class="my-Image my-Image--fix" />
+          <h2 class="my-Headline my-my-Card-headline">Libero necessitatibus sit tempora!</h2>
+          <p class="my-Copy my-my-Card-copy">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, consequatur corporis, culpa cum earum est libero necessitatibus sit tempora ullam, vel voluptatum! Corporis cumque in minus modi repellat totam velit.</p>
         </div>
         <div aria-labelledby="quad" class="nmspc-Layout nmspc-Layout--4">
-          <div class="Card Card--white">
-            <button class="Button Card-Button Card-Button--icon"><span class="Icon Button-Icon"><svg viewBox="0 0 24 24" class="Svg Icon-Svg"><path d="M23,10C23,8.89 22.1,8 21,8H14.68L15.64,3.43C15.66,3.33 15.67,3.22 15.67,3.11C15.67,2.7 15.5,2.32 15.23,2.05L14.17,1L7.59,7.58C7.22,7.95 7,8.45 7,9V19A2,2 0 0,0 9,21H18C18.83,21 19.54,20.5 19.84,19.78L22.86,12.73C22.95,12.5 23,12.26 23,12V10M1,21H5V9H1V21Z" class="Path"></path></svg></span>Like</button>
+          <div class="my-Card my-Card--white">
+            <button class="my-Button my-my-Card-button my-my-Card-button--icon"><span class="my-Icon my-my-Button-icon"><svg viewBox="0 0 24 24" class="my-Svg my-my-Icon-svg"><path d="M23,10C23,8.89 22.1,8 21,8H14.68L15.64,3.43C15.66,3.33 15.67,3.22 15.67,3.11C15.67,2.7 15.5,2.32 15.23,2.05L14.17,1L7.59,7.58C7.22,7.95 7,8.45 7,9V19A2,2 0 0,0 9,21H18C18.83,21 19.54,20.5 19.84,19.78L22.86,12.73C22.95,12.5 23,12.26 23,12V10M1,21H5V9H1V21Z" class="my-Path"></path></svg></span>Like</button>
             <button
-              class="Button Card-Button Card-Button--icon"><span class="Icon Button-Icon"><svg viewBox="0 0 24 24" class="Svg Icon-Svg"><path d="M19,15H23V3H19M15,3H6C5.17,3 4.46,3.5 4.16,4.22L1.14,11.27C1.05,11.5 1,11.74 1,12V14A2,2 0 0,0 3,16H9.31L8.36,20.57C8.34,20.67 8.33,20.77 8.33,20.88C8.33,21.3 8.5,21.67 8.77,21.94L9.83,23L16.41,16.41C16.78,16.05 17,15.55 17,15V5C17,3.89 16.1,3 15,3Z" class="Path"></path></svg></span>Disike</button>
+              class="my-Button my-my-Card-button my-my-Card-button--icon"><span class="my-Icon my-my-Button-icon"><svg viewBox="0 0 24 24" class="my-Svg my-my-Icon-svg"><path d="M19,15H23V3H19M15,3H6C5.17,3 4.46,3.5 4.16,4.22L1.14,11.27C1.05,11.5 1,11.74 1,12V14A2,2 0 0,0 3,16H9.31L8.36,20.57C8.34,20.67 8.33,20.77 8.33,20.88C8.33,21.3 8.5,21.67 8.77,21.94L9.83,23L16.41,16.41C16.78,16.05 17,15.55 17,15V5C17,3.89 16.1,3 15,3Z" class="my-Path"></path></svg></span>Disike</button>
           </div>
-          <div class="Card Card--success">
-            <h2 class="Headline Card-Headline">You succeeded</h2>
+          <div class="my-Card my-Card--success">
+            <h2 class="my-Headline my-my-Card-headline">You succeeded</h2>
           </div>
-          <div class="Card Card--warning">
-            <h2 class="Headline Card-Headline">Warning!</h2>
+          <div class="my-Card my-Card--warning">
+            <h2 class="my-Headline my-my-Card-headline">Warning!</h2>
           </div>
-          <div class="Card Card--yellow">
-            <p class="Copy Card-Copy">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, consequatur corporis, culpa cum earum est libero necessitatibus sit tempora ullam, vel voluptatum! Corporis cumque in minus modi repellat totam velit.</p>
+          <div class="my-Card my-Card--yellow">
+            <p class="my-Copy my-my-Card-copy">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, consequatur corporis, culpa cum earum est libero necessitatibus sit tempora ullam, vel voluptatum! Corporis cumque in minus modi repellat totam velit.</p>
           </div>
         </div>
       </div>

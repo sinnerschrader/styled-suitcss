@@ -1,23 +1,21 @@
 const React = require("react");
 const {
-  Button,
-  CardHeadline,
-  CardCopy,
-  CardImage,
-  FitCardImage,
-  IconCardButton,
-  SmallCardImage,
-  SuccessCard,
-  WarningCard,
-  BlueCard,
-  YellowCard,
-  PurpleCard,
-  WhiteCard
+	Button,
+	CardHeadline,
+	CardCopy,
+	CardImage,
+	FitCardImage,
+	IconCardButton,
+	SmallCardImage,
+	SuccessCard,
+	WarningCard,
+	BlueCard,
+	YellowCard,
+	PurpleCard,
+	WhiteCard
 } = require("./patterns/patterns");
 
-const {
-  LayoutQuad
-} = require("./patterns/layout");
+const {LayoutQuad} = require("./patterns/layout");
 
 const {ICONS} = require("./design-system");
 

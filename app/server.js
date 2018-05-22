@@ -2,10 +2,11 @@ const path = require("path");
 const {writeFile} = require("fs");
 const React = require("react");
 const {renderToString} = require("react-dom/server");
+const {minify} = require("html-minifier");
+const pretty = require("pretty");
 const App = require("./app");
 const styled = require("../").default;
-const pretty = require("pretty");
-const {minify} = require("html-minifier");
+const log = require("../tools/logger").default;
 
 const markup = renderToString(React.createElement(App));
 const sheet = new styled.ServerStyleSheet();
@@ -23,7 +24,7 @@ const template = html => `
 </body>
 </html>
 `;
-console.info("Rendering to static");
+log.info("Rendering to static");
 
 const html = template(markup);
 
@@ -38,10 +39,10 @@ writeFile(
 	}),
 	err => {
 		if (err) {
-			console.error(err);
+			log.error(err);
 			return;
 		}
-		console.info(
+		log.info(
 			`Render to static is done: ${path.resolve(__dirname, "index.html")}`
 		);
 	}
@@ -49,10 +50,10 @@ writeFile(
 
 writeFile(path.resolve(__dirname, "pretty.html"), pretty(html), err => {
 	if (err) {
-		console.error(err);
+		log.error(err);
 		return;
 	}
-	console.info(
+	log.info(
 		`Render to static is done: ${path.resolve(__dirname, "pretty.html")}`
 	);
 });

@@ -2,67 +2,80 @@
 
 ```shell
 npm install styled-suitcss
-## yarn add styled-suitcss 
+## yarn add styled-suitcss
 ```
-
-This library attempts to solve a specific problem:  
-> **Create UIkits via [React.js](https://reactjs.org/) with the flavor of [styled-components](https://github.com/styled-components/styled-components) and  [suitcss naming](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md)**
 
 ## Info
 
-* use [React.js](https://reactjs.org/)
-* 💅 similar syntax and API as [styled-components](https://github.com/styled-components/styled-components)
-* 👑 have control over the generated classNames
-* 💉 drug-free classNames (no hash)
-* 📝 generate HTML snippets/templates
-* 📝 generate CSS components/libraries
-* 📝 Server side rendering
+### What is the purpose of this library?
+
+The sole purpose of this library is to generate html & css libraries or snippets of code.  
+Modern technologies and concepts have enabled us to have a pretty good control over dependencies
+and scopes. When these advantages can't be used due to the production environment we face the
+same issue that led us to creating these concepts.
+
+### React.js
+
+React helped us get rid of HTML templates and allowed us to define a virtual DOM that could be extended
+with JavaScript.
+
+If we remove the entire logic besides the rendering we can still use this main advantage to generate HTML.
+
+> This library is not intended to be used with Reacts mechanism.  
+> It attempts to use React to generate HTML and allow setting dynamic states
+
+### Styled components (and others)
+
+The idea of CSS in JS has worn many faces, none of which ever convinced us. Whe the idea of using
+JavaScript template helpers, things changed. Before it had not been possible to have such a reliable
+dependency management and styling scope without injecting inline styles.
+
+Let's again take away most of the logic here and focus on the basic idea: "define/extend styles on a component level"
+and use this feature to generate plain CSS.
 
 > This library does not use [styled-components](https://github.com/styled-components/styled-components).  
 > It attempts to mock certain API points but only supports some basic features (some modified)
 
+### Suitcss (naming conventions)
+
+Over time we have seen numerous naming conventions to ensure human readable scoped selectors.  
+Suitcss has done a very nice job of adapting this idea so we decided to use its naming conventions.
+
+> This library does not use [suitcss](https://github.com/suitcss).  
+> It attempts to follow their [naming conventions](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md)
+
+### Can I use this in production?
+
+We do not advise the use for production purpose.
+
 ## CLI tool
 
-```shell
+```bash
   extract-styled-suitcss "lib/patterns/**/*.js"
+```
+
+### Output folder
+
+```bash
+  extract-styled-suitcss "lib/patterns/**/*.js" --outDir path/to/dist
+  ## extract-styled-suitcss "lib/patterns/**/*.js" -o path/to/dist
 ```
 
 ## Examples
 
-### JSX input
+> Look at the [examples](https://github.com/sinnerschrader/styled-ui/tree/master/examples)
+> or [tests](https://github.com/sinnerschrader/styled-ui/tree/master/test) for more detail.
+
+### JS input
 
 ```jsx
-import styled, {keyframes} from 'styled-suitcss';
-import {colors} from './designkit';
-
-export const Card = styled.article({
-  _name: "Card"
-})`
-  margin: 1em;
-  padding: 1em;
-  border-radius: 3px;
-  background: #fff;
-  color: #000;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-`
-
-const blink = keyframes({
-  _namespace: "Animation",
-  _name: "Blink"
-})`
-  from {
-        opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-`;
+import styled from "styled-suitcss";
 
 export const Button = styled.button({
-    _name: "Button"
+	_namespace: "my",
+	_name: "Button"
 })`
     padding: 0.5em 1em;
-    margin: 0.5em;
     background: #ddd;
     color: #000;
     font-size: 1em;
@@ -72,127 +85,30 @@ export const Button = styled.button({
     &:hover {
         background-color: #ccc;
     }
-    
-    &:active {
-        background-color: #bbb;
-    }
-    
-    &.is-selected {
-        box-shadow: 0 0 0 4px ${colors.selection};
-    }
-    
-    &.is-blinking {
-        animation: ${blink} 0.5s steps(2, end) infinite alternate;
-    }
-`
-
-export const PrimaryButton = Button.extend({
-  _name: "primary"
-})`
-  background-color: ${colors.primary.back};
-  color: ${colors.primary.front};
 `;
-
-export const CardButton = Button.extend({
-  _namespace: "Card"
-})`
-  width: 100%;
-  margin: 0.5em 0;
-`;
-
-export const PrimaryCardButton = PrimaryButton.extend({
-  _namespace: "Card"
-})`
-  width: 100%;
-  margin: 0.5em 0;
-`;
-
 ```
 
-
-### HTML snippets
+### HTML output
 
 > one file per snippet
 
 ```html
-<button class="Button is-selected"></button>
-<button class="Button Button--primary is-blinking"></button>
-<article class="Card"></article>
-<button class="Button Button--primary Card-Button--primary"></button>
-<button class="Button Card-Button"></button>
+<button class="my-Button">{{children}}</button>
 ```
 
-
-### CSS library
+### CSS output
 
 ```css
-.Button {
-    padding: 0.5em 1em;
-    margin: 0.5em;
-    background: #ddd;
-    color: #000;
-    font-size: 1em;
-    border: 1px solid #aaa;
-    border-radius: 3px;
+.my-Button {
+	padding: 0.5em 1em;
+	background: #ddd;
+	color: #000;
+	font-size: 1em;
+	border: 1px solid #aaa;
+	border-radius: 3px;
 }
 
-.Button:hover {
-    background-color: #ccc;
+.my-Button:hover {
+	background-color: #ccc;
 }
-
-.Button:active {
-    background-color: #bbb;
-}
-
-.Button.is-selected {
-    box-shadow: 0 0 0 4px pink;
-}
-
-.Button.is-blinking {
-    -webkit-animation: Animation-Blink 0.5s steps(2, end) infinite alternate;
-    animation: Animation-Blink 0.5s steps(2, end) infinite alternate;
-}
-
-.Card {
-    margin: 1em;
-    padding: 1em;
-    border-radius: 3px;
-    background: #fff;
-    color: #000;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-}
-
-.Button--primary {
-    background-color: red;
-    color: white;
-}
-
-.Card-Button {
-    width: 100%;
-    margin: 0.5em 0;
-}
-
-.Card-Button--primary {
-    width: 100%;
-    margin: 0.5em 0;
-}
-
-@-webkit-keyframes Animation-Blink {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-
-@keyframes Animation-Blink {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-
 ```

@@ -20,6 +20,6 @@ const LayoutQuad = Layout.extend({
 `;
 
 module.exports = {
-  Layout,
-  LayoutQuad
+	Layout,
+	LayoutQuad
 };

@@ -2,7 +2,11 @@ const React = require("react");
 const styled = require("../..").default;
 const {blink, shake} = require("../animations");
 const {COLORS, ICONS} = require("../design-system");
+
+const _namespace = "my";
+
 const Card = styled.div({
+	_namespace,
 	_name: "Card"
 })`
   display: flex;
@@ -58,13 +62,14 @@ const SuccessCard = Card.extend({
 `;
 
 const Image = styled.img({
+	_namespace,
 	_name: "Image"
 })`
   display: block;
 `;
 
 const CardImage = Image.extend({
-	_namespace: "Card"
+	_parent: Card
 })`
   width: 100%;
 `;
@@ -87,18 +92,20 @@ const SmallCardImage = CardImage.extend({
 `;
 
 const Copy = styled.p({
+	_namespace,
 	_name: "Copy"
 })`
 	margin: 0;
 `;
 
 const CardCopy = Copy.extend({
-	_namespace: "Card"
+	_parent: Card
 })`
 	font-size: 1rem;
 `;
 
 const Headline = styled.h2({
+	_namespace,
 	_name: "Headline"
 })`
 	margin: 0;
@@ -106,26 +113,20 @@ const Headline = styled.h2({
 `;
 
 const CardHeadline = Headline.extend({
-	_namespace: "Card"
+	_parent: Card
 })`
   margin-bottom: 1rem;
 `;
 
 const Svg = styled.svg({
+	_namespace,
 	_name: "Svg"
 })`
   overflow: visible;
 `;
 
-const IconSvg = Svg.extend({
-	_namespace: "Icon",
-	viewBox: "0 0 24 24"
-})`
-  height: 1em;
-  width: 1em;
-`;
-
 const Path = styled.path({
+	_namespace,
 	_name: "Path"
 })`
   fill: currentColor;
@@ -139,13 +140,23 @@ const IconType = props =>
 	);
 
 const Icon = styled.span({
+	_namespace,
 	_name: "Icon",
 	_children: props => React.createElement(IconType, props)
 })`
   display: inline-flex;
 `;
 
+const IconSvg = Svg.extend({
+	_parent: Icon,
+	viewBox: "0 0 24 24"
+})`
+  height: 1em;
+  width: 1em;
+`;
+
 const Button = styled.button({
+	_namespace,
 	_name: "Button"
 })`
   display: inline-flex;
@@ -193,13 +204,13 @@ const Button = styled.button({
 `;
 
 const ButtonIcon = Icon.extend({
-	_namespace: "Button"
+	_parent: Button
 })`
   margin-right: 0.5em;
 `;
 
 const CardButton = Button.extend({
-	_namespace: "Card"
+	_parent: Card
 })`
   width: 100%;
   margin: 0.5em 0;

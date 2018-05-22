@@ -1,0 +1,40 @@
+/* Card */
+.Card {
+    display: block;
+}
+/* Image */
+.Image {
+    display: block;
+}
+/* Input */
+.Input {
+    display: block;
+}
+/* Button */
+.Button {
+    display: block;
+}
+/* s2-Grid */
+.s2-Grid {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+/* Column */
+.Column {
+    -webkit-flex: 0 0 calc(100% / var(--columns,4));
+    -ms-flex: 0 0 calc(100% / var(--columns,4));
+    flex: 0 0 calc(100% / var(--columns,4));
+}
+/* boo-Column */
+.boo-Column {
+    --columns: 12;
+}
+/* s2-Grid-column */
+.s2-Grid-column {
+    --columns: 8;
+}
