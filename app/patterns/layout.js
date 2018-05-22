@@ -1,7 +1,7 @@
 const styled = require("../..").default;
 
 const Layout = styled.div({
-	_namespace: "nmspc",
+	_namespace: "my",
 	_name: "Layout"
 })`
   display: grid;

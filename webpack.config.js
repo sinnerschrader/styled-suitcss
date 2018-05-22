@@ -4,7 +4,9 @@ const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin");
 
 const ROOT = __dirname;
 const DOCS = path.resolve(ROOT, "docs");
+const {NODE_ENV} = process.env;
 
+const prod = NODE_ENV === "production";
 module.exports = {
 	entry: path.resolve(ROOT, "app/index.js"),
 	output: {
@@ -12,7 +14,7 @@ module.exports = {
 		filename: "[name].js",
 		libraryTarget: "umd"
 	},
-	mode: process.env.NODE_ENV || "development",
+	mode: NODE_ENV || "development",
 	devtool: "source-map",
 	module: {
 		rules: [

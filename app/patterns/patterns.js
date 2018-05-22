@@ -75,7 +75,7 @@ const CardImage = Image.extend({
 `;
 
 const FitCardImage = Image.extend({
-	_name: "fix"
+	_name: "fit"
 })`
   width: calc(100% + 2rem);
   margin: -1rem -1rem 1rem -1rem;

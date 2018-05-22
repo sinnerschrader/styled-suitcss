@@ -29,8 +29,7 @@
 		"format:ts": "prettier '{app,src,tools,examples/src}/**/*.ts' --write",
 		"format:md":
 			"prettier Readme.md '{app,src,tools,examples/src}/**/*.md' --parser markdown --write",
-		"gh-pages":
-			"cross-env NODE_ENV=production yarn build && cross-env NODE_ENV=production webpack",
+		"gh-pages": "cross-env NODE_ENV=production webpack",
 		"prebuild": "yarn clean",
 		"release": "standard-version",
 		"start": "webpack-dev-server --hot",
