@@ -1,39 +1,55 @@
 const path = require("path");
 const React = require("react");
 const {renderToString} = require("react-dom/server");
-const styled = require("../lib/server").default;
 const pretty = require("pretty");
 const cssbeautify = require("cssbeautify");
 const pify = require("pify");
 const mkdirp = pify(require("mkdirp"));
-const rimraf = pify(require("rimraf"));
 const {writeFile} = pify(require("fs"));
+const decamelize = require("decamelize");
 
+const styled = require("../lib/server").default;
+const log = require("./logger").default;
 const ROOT = process.cwd();
-module.exports = async (
-	{component, _component, fileName}, {outDir = "extract"}
-) => {
-  const OUT_DIR = path.resolve(ROOT, outDir);
-	await rimraf(OUT_DIR);
-	await mkdirp(OUT_DIR);
-	let markup = ""
-	try {
-		markup = renderToString(React.createElement(component));
-  } catch(err) {
-    markup = renderToString(React.createElement(_component));
-  }
-	const sheet = new styled.ServerStyleSheet();
-	const styles = sheet.getStyles();
 
-	console.info(`Preparing: ${fileName}`);
-	const outFile = path.resolve(OUT_DIR, fileName);
-	const {ext} = path.parse(fileName);
+const renderComponent = (a, b) => {
+	let markup = "";
+	try {
+		markup = renderToString(React.createElement(a));
+	} catch (err) {
+		markup = renderToString(React.createElement(b));
+	}
+	return markup;
+};
+
+module.exports = async (
+	{component, _component, fileName},
+	{outDir = "extract"}
+) => {
+	const {ext, name} = path.parse(fileName);
+	const OUT_DIR = path.resolve(ROOT, outDir, decamelize(name, "-"));
+	const sheet = new styled.ServerStyleSheet();
+
+	await mkdirp(OUT_DIR);
 	if (ext === ".css") {
+		const outFile = path.resolve(OUT_DIR, "styles.css");
+		renderComponent(component, _component);
+		const styles = sheet.getStyles();
 		const result = cssbeautify(styles, {});
 		await writeFile(outFile, result);
-		console.info(`Rendering: ${path.resolve(OUT_DIR, fileName)}`);
+		log.info(`Created: ${outFile}`);
 	} else if (ext === ".html") {
-		await writeFile(outFile, pretty(markup));
-		console.info(`Rendering: ${path.resolve(OUT_DIR, fileName)}`);
+		const htmlFile = path.resolve(OUT_DIR, "template.html");
+		const cssFile = path.resolve(OUT_DIR, "style.css");
+		// clean styles
+		sheet.collectStyles();
+		const markup = renderComponent(component, _component);
+		const styles = sheet.getStyles();
+		const htmlResult = pretty(markup, {});
+		const cssResult = cssbeautify(styles, {});
+		await writeFile(cssFile, cssResult);
+		log.info(`Created: ${cssFile}`);
+		await writeFile(htmlFile, htmlResult);
+		log.info(`Created: ${htmlFile}`);
 	}
 };

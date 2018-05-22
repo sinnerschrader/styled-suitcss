@@ -13,43 +13,53 @@ module.exports = (FILE_GLOB, {outDir}) => {
 			})
 			.reduce((a, b) => ({...a, ...b}), {});
 		const items = Object.keys(collection).map(name => {
-				 const component = React.createElement(collection[name], {children: name});
-         const _component = React.createElement(collection[name], {src: "https://placehold.it/200"});
+			const component = React.createElement(collection[name], {
+				children: "{{children}}"
+			});
+			const _component = React.createElement(collection[name], {
+				src: "{{src}}",
+				value: "{{value}}",
+				alt: "{{alt}}"
+			});
 			return {
-        name,
-        component,
-        _component
-      }
+				name,
+				component,
+				_component
+			};
 		});
 		extract(
 			{
-        component: () =>
-          React.createElement(
-            React.Fragment,
-            {},
-            ...items.map(x => x.component)
-          ),
-        _component: () =>
-          React.createElement(
-            React.Fragment,
-            {},
-            ...items.map(x => x._component)
-          ),
-				fileName: `styles.css`
+				component: () =>
+					React.createElement(
+						React.Fragment,
+						{},
+						...items.map(x => x.component)
+					),
+				_component: () =>
+					React.createElement(
+						React.Fragment,
+						{},
+						...items.map(x => x._component)
+					),
+				fileName: "styles.css"
 			},
-      {outDir}
+			{outDir}
 		);
 		items.forEach(item => {
-        extract(
-          {
-            component: () =>
-              React.createElement(React.Fragment, {}, item.component),
-            _component: () =>
-              React.createElement(React.Fragment, {}, item._component),
-            fileName: `${item.name}.html`
-          },
-          {outDir}
-        );
+			extract(
+				{
+					component: () =>
+						React.createElement(React.Fragment, {}, item.component),
+					_component: () =>
+						React.createElement(
+							React.Fragment,
+							{},
+							item._component
+						),
+					fileName: `${item.name}.html`
+				},
+				{outDir}
+			);
 		});
 	});
 };
