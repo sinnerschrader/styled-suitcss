@@ -78,7 +78,6 @@ class StyledComponent extends React.Component<InitialProps> {
 			},
 			() => {
 				this.style;
-				console.log(this.state);
 			}
 		);
 	}
@@ -217,7 +216,6 @@ class StyledComponent extends React.Component<InitialProps> {
 	 * @returns {any}
 	 */
 	render() {
-		//console.log(this.validProps);
 		if (!this.tag) {
 			return null;
 		}
