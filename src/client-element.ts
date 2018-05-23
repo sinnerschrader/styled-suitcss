@@ -5,7 +5,7 @@ import StyledComponent, {
 } from "./styled-component";
 import Store, {StyleStore} from "./store";
 import extendComponent, {ExtendComponent} from "./extend-component";
-import {updateStyles} from "./utils";
+import {addNamespace, updateStyles} from "./utils";
 
 import keyframeCreator from "./keyframes";
 
@@ -23,7 +23,10 @@ const create = (
 			initialProps,
 			create
 		);
-
+		static suitcssId: string = addNamespace(
+			initialProps._name,
+			initialProps._namespace
+		);
 		initialProps: InitialProps = initialProps;
 		strings: string[] = strings;
 		args: (string | StyleInterpolation)[] = args;
