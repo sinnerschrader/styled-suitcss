@@ -1325,33 +1325,38 @@ and limitations under the License.
 				a = n(23),
 				o = n(20),
 				i = n(16),
-				l = n(15);
+				l = n(0),
+				u = n(15);
 			t.store = new o.default({document: document});
 			(t.keyframes = function(e) {
-				return l.default(t.store, e);
+				return u.default(t.store, e);
 			}),
-				(t.default = function e(n, o, l, u) {
+				(t.default = function e(n, o, u, c) {
 					return (
 						void 0 === n && (n = []),
 						void 0 === o && (o = []),
 						(function(a) {
-							function c() {
+							function s() {
 								var e =
 									(null !== a && a.apply(this, arguments)) ||
 									this;
 								return (
-									(e.initialProps = u),
+									(e.initialProps = c),
 									(e.strings = n),
 									(e.args = o),
-									(e.tag = l),
+									(e.tag = u),
 									(e.store = t.store),
 									e
 								);
 							}
 							return (
-								r.__extends(c, a),
-								(c.extend = i.default(c, u, e)),
-								c
+								r.__extends(s, a),
+								(s.extend = i.default(s, c, e)),
+								(s.suitcssId = l.addNamespace(
+									c._name,
+									c._namespace
+								)),
+								s
 							);
 						})(a.default)
 					);
@@ -3188,7 +3193,7 @@ object-assign
 								}
 							),
 								this.setState({_mounted: !0}, function() {
-									e.style, console.log(e.state);
+									e.style;
 								});
 						}),
 						(t.prototype.UNSAFE_componentWillMount = function() {
