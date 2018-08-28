@@ -1,7 +1,10 @@
 {
-	"presets": [
-		["@babel/stage-2", {"decoratorsLegacy": true}],
-		"@babel/react",
-		"@babel/env"
+	"presets": ["@babel/react", "@babel/env"],
+	"plugins": [
+		["@babel/plugin-proposal-decorators", {"legacy": true}],
+		"@babel/plugin-proposal-function-sent",
+		"@babel/plugin-proposal-export-namespace-from",
+		"@babel/plugin-proposal-numeric-separator",
+		"@babel/plugin-proposal-throw-expressions"
 	]
 }
