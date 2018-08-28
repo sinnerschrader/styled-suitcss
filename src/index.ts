@@ -1,8 +1,9 @@
-import createElement, {store} from "./server-element";
+import createElement, {store, keyframes} from "./create-element";
 import StyledBase from "./styled";
-import {NAMESPACE} from "./style-element";
 import {CreateElement, InitialProps} from "./styled-component";
+import {NAMESPACE} from "./style-element";
 import {SEPARATOR} from "./constants";
+
 class Styled extends StyledBase {
 	createElement: CreateElement = createElement;
 }
@@ -31,6 +32,5 @@ styled.ServerStyleSheet = class ServerStyleSheet {
 	}
 };
 
-export {keyframes} from "./server-element";
-
+export {keyframes};
 export default styled;

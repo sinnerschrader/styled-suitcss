@@ -16,9 +16,11 @@ const keyframes: (
 	options: {_name: string; _namespace?: string; _parent?: string}
 ) => (strings: string[], ...args: (string | StyleInterpolation)[]): string => {
 	const style = strings
-		.map((str: string, index: number): string => {
-			return [str, args[index]].filter(Boolean).join("");
-		})
+		.map(
+			(str: string, index: number): string => {
+				return [str, args[index]].filter(Boolean).join("");
+			}
+		)
 		.join("");
 	const name = addNamespace(
 		options._name,

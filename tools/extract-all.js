@@ -19,6 +19,7 @@ module.exports = (FILE_GLOB, {outDir}) => {
 			const _component = React.createElement(collection[name], {
 				src: "{{src}}",
 				value: "{{value}}",
+				onChange(e) {},
 				alt: "{{alt}}"
 			});
 			return {

@@ -8,7 +8,7 @@ const mkdirp = pify(require("mkdirp"));
 const {writeFile} = pify(require("fs"));
 const decamelize = require("decamelize");
 
-const styled = require("../lib/server").default;
+const styled = require("../lib").default;
 const log = require("./logger").default;
 const ROOT = process.cwd();
 

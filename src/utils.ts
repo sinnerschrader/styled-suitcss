@@ -283,6 +283,9 @@ export const updateStyles: (
  * @returns {string}
  */
 export const stateCase: (str: string) => string = (str: string): string =>
-	str.replace(/^is([A-Z])/, (original: string, $1: string): string => {
-		return `is-${$1.toLowerCase()}`;
-	});
+	str.replace(
+		/^is([A-Z])/,
+		(original: string, $1: string): string => {
+			return `is-${$1.toLowerCase()}`;
+		}
+	);

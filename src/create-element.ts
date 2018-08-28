@@ -1,3 +1,4 @@
+/* global document */
 import StyledComponent, {
 	StyleInterpolation,
 	InitialProps
@@ -8,7 +9,8 @@ import {addNamespace, updateStyles} from "./utils";
 
 import keyframeCreator from "./keyframes";
 
-export const store = new Store();
+const doc = "document" in global ? document : null;
+export const store = new Store({document: doc});
 
 const create = (
 	strings: string[] = [],
